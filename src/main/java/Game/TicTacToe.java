@@ -7,6 +7,7 @@ only machine learning.
 
 package Game;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
@@ -27,7 +28,7 @@ public class TicTacToe {
 	static int location;
 	public static boolean[] usedArray = {false,false,false,false,false,false,false,false,false};
 	
-	public static void main(String[] args){
+	public static void play(File weightsDbFile, File weightsDb2File){
 		int inputq = 0;
 		//H v H, M v M, R v R, H v M, H v R, M v R
 		String[] q = {"Player vs  Random AI", "Player vs Player", "Random AI vs Random AI", "Player vs Machine L", "Random AI vs MachineL", "MachineL vs MachineL"};
@@ -142,7 +143,7 @@ public class TicTacToe {
 			    drawBoard(boardArray);
 				usedArray = new boolean[]{false,false,false,false,false,false,false,false,false};
 				//JOptionPane.showMessageDialog(null, "You chose Player vs Machine Learning");
-				MLAI.nodeWeights = MLAI.dataInput(".\\.\\WeightsDatabase.txt");
+				MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
 				//MLAI.printArr(MLAI.nodeWeights);
 				int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 				@SuppressWarnings("unused")
@@ -162,7 +163,7 @@ public class TicTacToe {
 		    			System.out.println("New Weights");
 		    			MLAI.printArr(MLAI.nodeWeights); 
 		    			try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -189,7 +190,7 @@ public class TicTacToe {
 		    			System.out.println("New Weights");
 		    			MLAI.printArr(MLAI.nodeWeights);
 		    			try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -207,7 +208,7 @@ public class TicTacToe {
 	    //Machine Learning vs Random AI
 	    else if (inputq == 4) {
 			//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Random AI");
-			MLAI.nodeWeights = MLAI.dataInput(".\\.\\WeightsDatabase.txt");
+			MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
 			int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			
 			int timesUsed = 0;
@@ -230,7 +231,7 @@ public class TicTacToe {
 	    			System.out.println("New Weights");
 	    			MLAI.printArr(MLAI.nodeWeights);
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -255,7 +256,7 @@ public class TicTacToe {
 	    			System.out.println("New Weights");
 	    			MLAI.printArr(MLAI.nodeWeights); 
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -272,12 +273,12 @@ public class TicTacToe {
 	    //Machine Learning vs Machine Learning
 		else if (inputq == 5) {
 			int c1 = 0, c2 = 0, t = 0;
-			for (int x = 0; x < 100; x++) {
+			for (int x = 0; x < 1000; x++) {
 				boardArray = new int[]{3,4,5,6,7,8,9,10,11};
 				usedArray = new boolean[]{false,false,false,false,false,false,false,false,false};
 				//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
-				MLAI.nodeWeights = MLAI.dataInput(".\\.\\WeightsDatabase.txt");
-				MLAI.nodeWeight2 = MLAI.dataInput(".\\.\\WeightsDatabase2.txt");
+				MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
+				MLAI.nodeWeight2 = MLAI.dataInput(weightsDb2File);
 				//MLAI.printArr(MLAI.nodeWeights);
 				int[] used = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 				int[] used2 = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
@@ -302,14 +303,14 @@ public class TicTacToe {
 						System.out.println("New Weights");
 						MLAI.printArr(MLAI.nodeWeights);
 						try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
 						try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase2.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDb2File);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -328,14 +329,14 @@ public class TicTacToe {
 						System.out.println("New Weights");
 						MLAI.printArr(MLAI.nodeWeight2);
 						try {
-							MLAI.dataOutput(MLAI.nodeWeight2, ".\\\\.\\\\WeightsDatabase2.txt");
+							MLAI.dataOutput(MLAI.nodeWeight2, weightsDb2File);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
 						try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -369,14 +370,14 @@ public class TicTacToe {
 						System.out.println("New Weights");
 						MLAI.printArr(MLAI.nodeWeight2);
 						try {
-							MLAI.dataOutput(MLAI.nodeWeight2, ".\\\\.\\\\WeightsDatabase2.txt");
+							MLAI.dataOutput(MLAI.nodeWeight2, weightsDb2File);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 
 						try {
-							MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 						} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

@@ -21,8 +21,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import tictactoe.TicTacToeTest;
 
 /*
 TODO: Make reSort() work/ 
@@ -59,9 +62,12 @@ public class MLAI {
 
 		System.out.println("\ndataOutput()");
 		try {
-			dataOutput(nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+			File weightsDbFile = new File(MLAI.class.getResource("/WeightsDatabase.txt").toURI());
+
+			dataOutput(nodeWeights, weightsDbFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
 		//System.out.println("read new weights");
@@ -70,12 +76,11 @@ public class MLAI {
 
 	}
 	
-	public static double[][] dataInput(String filePath) {
+	public static double[][] dataInput(File filePath) {
 		double[][] output = { { 0, w0 }, { 1, w1 }, { 2, w2 }, { 3, w3 }, { 4, w4 }, { 5, w5 }, { 6, w6 }, { 7, w7 },
 				{ 8, w8 } };
-		File file = new File(filePath);
 		try {
-			Scanner sc = new Scanner(file);
+			Scanner sc = new Scanner(filePath);
 			while (sc.hasNextLine()) {
 				for (int i = 0, rep = 0; i < 9; i++) {
 					String str = sc.nextLine();
@@ -91,7 +96,7 @@ public class MLAI {
 		return output;
 	}
    
-   public static void dataOutput(double[][] nW, String filePath) throws IOException {
+   public static void dataOutput(double[][] nW, File filePath) throws IOException {
 	   PrintWriter pw = new PrintWriter(new FileWriter(filePath));
 	 
 		for (int i = 0; i < nW.length; i++) {

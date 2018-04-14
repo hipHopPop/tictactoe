@@ -4,20 +4,23 @@ import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.URISyntaxException;
 
 import javax.swing.JOptionPane;
 
 import AI.MLAI;
+import tictactoe.TicTacToeTest;
 
 public class Trainer {
-	public static void main(String[] args){
-	
+	public static void main(String[] args) throws URISyntaxException{
+		File weightsDbFile = new File(TicTacToeTest.class.getResource("/WeightsDatabase.txt").toURI());
+		File weightsDb2File = new File(TicTacToeTest.class.getResource("/WeightsDatabase2.txt").toURI());
 		for(int i = 0; i < 100; i++) {
 			
 
 			JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
-			MLAI.nodeWeights = MLAI.dataInput(".\\.\\WeightsDatabase.txt");
-			MLAI.nodeWeight2 = MLAI.dataInput(".\\.\\WeightsDatabase2.txt");
+			MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
+			MLAI.nodeWeight2 = MLAI.dataInput(weightsDb2File);
 			//MLAI.printArr(MLAI.nodeWeights);
 			int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
 			int[] used2 = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
@@ -42,7 +45,7 @@ public class Trainer {
 	    			System.out.println("New Weights");
 	    			MLAI.printArr(MLAI.nodeWeights);
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -51,7 +54,7 @@ public class Trainer {
 					}
 	    			
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase2.txt");
+						MLAI.dataOutput(MLAI.nodeWeights, weightsDb2File);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -81,14 +84,14 @@ public class Trainer {
 	    			System.out.println("New Weights");
 	    			MLAI.printArr(MLAI.nodeWeight2);
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeight2, ".\\\\.\\\\WeightsDatabase2.txt");
+						MLAI.dataOutput(MLAI.nodeWeight2, weightsDb2File);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, ".\\\\.\\\\WeightsDatabase.txt");
+						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
 					} catch (IOException e)
 	    			
 	    			
