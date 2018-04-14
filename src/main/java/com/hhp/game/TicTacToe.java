@@ -1,19 +1,22 @@
-/*
-Programmer: Mateo Silver
-Program: Tic-Tac-Toe-I/O
-Purpose: Computer learns to play tic tac toe using 
-only machine learning. 
-*/
+package com.hhp.game;
 
-package Game;
+import static com.hhp.game.util.Utility.dataInput;
+import static com.hhp.game.util.Utility.dataOutput;
+import static com.hhp.game.util.Utility.nodeWeights;
+import static com.hhp.game.util.Utility.nodeWeights2;
+import static com.hhp.game.util.Utility.output;
+import static com.hhp.game.util.Utility.printArr;
+import static com.hhp.game.util.Utility.reSort;
+import static com.hhp.game.util.Utility.reweight;
+import static com.hhp.game.util.Utility.reweightSortAndStore;
+import static com.hhp.game.util.Utility.sortByW;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
-import AI.MLAI;
-import AI.RandomAI;
+import com.hhp.game.util.RandomAI;
 
 public class TicTacToe {
 	//computer goes first
@@ -23,10 +26,10 @@ public class TicTacToe {
 	//3 -> 1 
 	//4 -> 2
 	//...
-	final static int turns = 9;
-	public static int[] boardArray = {3,4,5,6,7,8,9,10,11};
+	final static int turns 			= 9;
+	public static int[] boardArray 	= { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+	public static int[] used 		= { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
 	static int location;
-	public static boolean[] usedArray = {false,false,false,false,false,false,false,false,false};
 	
 	public static void play(File weightsDbFile, File weightsDb2File){
 		int inputq = 0;
@@ -37,15 +40,17 @@ public class TicTacToe {
 		        
 	    if(inputq == 0) { //Human 1 vs Random AI 
 			for (int x = 0; x < 10; x++) {
-				boardArray = new int[]{3,4,5,6,7,8,9,10,11};
+				boardArray 	= new int[]{ 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+				used 		= new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+				int timesUsed = 0;
 			    drawBoard(boardArray);
-				usedArray = new boolean[]{false,false,false,false,false,false,false,false,false};
 				//JOptionPane.showMessageDialog(null, "You chose Human vs AI");
 		    	for(int i = 0; i < Integer.MAX_VALUE; i++) {
 		    		//human's turn
 					//JOptionPane.showMessageDialog(null, "Player 1's turn");
-					location = humanInput(usedArray);
-		    		usedArray[location] = true;
+					location 		= humanInput(used);
+		        	used[location] 	= location;
+		        	timesUsed++;
 		    		turn(boardArray, location, 2);
 		    		//JOptionPane.showMessageDialog(null, "You placed an 'X' at "+location);
 		    		drawBoard(boardArray);
@@ -55,8 +60,9 @@ public class TicTacToe {
 		    		}
 		    		//Computer's turn now
 					//JOptionPane.showMessageDialog(null, "Computer 1's turn");
-					location = RandomAI.raiOutput();
-		        	usedArray[location] = true;
+					location 		= RandomAI.raiOutput();
+		        	used[location] 	= location;
+		        	timesUsed++;
 		    		turn(boardArray, location, 1);
 		    		//JOptionPane.showMessageDialog(null, "Computer 1 placed an 'O' at "+location);
 		    		drawBoard(boardArray);
@@ -74,12 +80,15 @@ public class TicTacToe {
 			}
 	    }
 	    else if (inputq == 1) { //Human 1 vs Human 2
+			int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+			int timesUsed = 0;
 			//JOptionPane.showMessageDialog(null, "You chose Human vs Human");
 			for(int i = 0; i < Integer.MAX_VALUE; i++) {
 	    		//human 1's turn
 				//JOptionPane.showMessageDialog(null, "Player 1's turn");
-	    		location = humanInput(usedArray);
-	    		usedArray[location] = true;
+	    		location 		= humanInput(used);
+	        	used[location] 	= location;
+	        	timesUsed++;
 	    		turn(boardArray, location, 2);
 	    		//JOptionPane.showMessageDialog(null, "Player 1 placed an 'X' at "+location);
 	    		drawBoard(boardArray);
@@ -90,8 +99,9 @@ public class TicTacToe {
 	    		
 	    		//Human 2's turn now
 				//JOptionPane.showMessageDialog(null, "Player 2's turn");
-				location = humanInput(usedArray);
-	        	usedArray[location] = true;
+				location = humanInput(used);
+	        	used[location] = location;
+	        	timesUsed++;
 	    		turn(boardArray, location, 1);
 	    		//JOptionPane.showMessageDialog(null, "Player 2 placed an 'O' at "+location);
 	    		drawBoard(boardArray);
@@ -105,12 +115,15 @@ public class TicTacToe {
 	    
 	    } //end Player v Player
 	    else if (inputq == 2) { //Random AI vs Random AI
+			int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
+			int timesUsed = 0;
 			//JOptionPane.showMessageDialog(null, "You chose Random AI vs Random AI");
 			for(int i = 0; i < Integer.MAX_VALUE; i++) {
 	    		//human's turn
 				//JOptionPane.showMessageDialog(null, "Random AI 1's turn");
-				location = humanInput(usedArray);
-	    		usedArray[location] = true;
+				location 		= humanInput(used);
+	        	used[location] 	= location;
+	        	timesUsed++;
 	    		turn(boardArray, location, 2);
 	    		//JOptionPane.showMessageDialog(null, "Random AI 1 placed an 'X' at "+location);
 	    		drawBoard(boardArray);
@@ -121,8 +134,9 @@ public class TicTacToe {
 	    		
 	    		//Computer's turn now
 				//JOptionPane.showMessageDialog(null, "Random AI 2's turn");
-				location = RandomAI.raiOutput();
-	        	usedArray[location] = true;
+				location 		= RandomAI.raiOutput();
+	        	used[location] 	= location;
+	        	timesUsed++;
 	    		turn(boardArray, location, 1);
 	    		//JOptionPane.showMessageDialog(null, "Random AI 2 placed an 'O' at "+location);
 	    		drawBoard(boardArray);
@@ -139,33 +153,31 @@ public class TicTacToe {
 	    //Player vs Machine Learning
 	    else if (inputq == 3) {
 			for (int x = 0; x < 10; x++) {
-				boardArray = new int[]{3,4,5,6,7,8,9,10,11};
+				boardArray 			= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
 			    drawBoard(boardArray);
-				usedArray = new boolean[]{false,false,false,false,false,false,false,false,false};
 				//JOptionPane.showMessageDialog(null, "You chose Player vs Machine Learning");
-				MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
-				//MLAI.printArr(MLAI.nodeWeights);
-				int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-				@SuppressWarnings("unused")
+				nodeWeights 	= dataInput(weightsDbFile);
+				//printArr(nodeWeights);
+				int[] used 			= { -1, -1, -1, -1, -1, -1, -1, -1, -1};
 				int timesUsed = 0;
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
 		    		//human's turn
 					//JOptionPane.showMessageDialog(null, "Player's turn");
-					location = humanInput(usedArray);
-		    		usedArray[location] = true;
+					location = humanInput(used);
+		        	used[location] 	= location;
+		        	timesUsed++;
 		    		turn(boardArray, location, 2);
 		    		//JOptionPane.showMessageDialog(null, "You placed an 'X' at "+location);
 		    		drawBoard(boardArray);
 		    		if(winYet(boardArray, 2) == true) {
-		    			MLAI.reweight(false, used,MLAI.nodeWeights); 
-		    			MLAI.nodeWeights = MLAI.reSort(MLAI.nodeWeights);
+		    			reweight(false, used,nodeWeights, 2); 
+		    			nodeWeights = reSort(nodeWeights);
 		    			//System.out.println("New node weights (lost)"); 
 		    			System.out.println("New Weights");
-		    			MLAI.printArr(MLAI.nodeWeights); 
+		    			printArr(nodeWeights); 
 		    			try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
+							dataOutput(nodeWeights, weightsDbFile);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 		    			endGame("Player 1"); 
@@ -175,24 +187,22 @@ public class TicTacToe {
 		    		//Machine Learning's turn now
 		    		
 					//JOptionPane.showMessageDialog(null, "Machine Learning's turn");
-					MLAI.sortByW(MLAI.nodeWeights);
-					location = MLAI.output(MLAI.nodeWeights,usedArray);
-		        	usedArray[location] = true;
-		        	used[location] = location;
+					sortByW(nodeWeights);
+					location 		= output(nodeWeights,used);
+		        	used[location] 	= location;
 		        	timesUsed++;
 		    		turn(boardArray, location, 1);
 		    		//JOptionPane.showMessageDialog(null, "Machine Learning placed an 'O' at "+location);
 		    		drawBoard(boardArray);
 		    		if(winYet(boardArray,1) == true) {
-		    			MLAI.reweight(true, used, MLAI.nodeWeights); 
+		    			reweight(true, used, nodeWeights, 1); 
 		    			//System.out.println("New node weights (won)"); 
-		    			MLAI.nodeWeights = MLAI.reSort(MLAI.nodeWeights);
+		    			nodeWeights = reSort(nodeWeights);
 		    			System.out.println("New Weights");
-		    			MLAI.printArr(MLAI.nodeWeights);
+		    			printArr(nodeWeights);
 		    			try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
+							dataOutput(nodeWeights, weightsDbFile);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 		    			//System.out.println("Data stored");
@@ -208,32 +218,29 @@ public class TicTacToe {
 	    //Machine Learning vs Random AI
 	    else if (inputq == 4) {
 			//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Random AI");
-			MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
-			int[] used = {-1,-1,-1,-1,-1,-1,-1,-1,-1};
-			
-			int timesUsed = 0;
-			//MLAI.printArr(MLAI.nodeWeights);
+			nodeWeights 	= dataInput(weightsDbFile);
+			int[] used 			= { -1, -1, -1, -1, -1, -1, -1, -1, -1};
+			int timesUsed 		= 0;
+			//printArr(nodeWeights);
 			for(int i = 0; i < Integer.MAX_VALUE; i++) {
 	    		//Machine Learning's turn
 				//JOptionPane.showMessageDialog(null, "Machine Learning's turn");
-				MLAI.sortByW(MLAI.nodeWeights);
-				location = MLAI.output(MLAI.nodeWeights,usedArray);
-	        	usedArray[location] = true;
+				sortByW(nodeWeights);
+				location 		= output(nodeWeights,used);
 	        	used[timesUsed] = location;
 	        	timesUsed++;
 	    		turn(boardArray, location, 2);
 	    		//JOptionPane.showMessageDialog(null, "Machine Learning placed an 'X' at "+location);
 	    		drawBoard(boardArray);
 	    		if(winYet(boardArray,2) == true) {
-	    			MLAI.reweight(true, used, MLAI.nodeWeights); 
+	    			reweight(true, used, nodeWeights, 2); 
 	    			//System.out.println("New node weights (won)"); 
-	    			MLAI.nodeWeights = MLAI.reSort(MLAI.nodeWeights);
+	    			nodeWeights = reSort(nodeWeights);
 	    			System.out.println("New Weights");
-	    			MLAI.printArr(MLAI.nodeWeights);
+	    			printArr(nodeWeights);
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
+						dataOutput(nodeWeights, weightsDbFile);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	    			//System.out.println("Data stored");
@@ -244,21 +251,21 @@ public class TicTacToe {
 	    		//Random AI's turn now
 	    		//JOptionPane.showMessageDialog(null, "Random AI's turn");
 				location = RandomAI.raiOutput();
-	        	usedArray[location] = true;
+	        	used[timesUsed] = location;
+	        	timesUsed++;
 	    		turn(boardArray, location, 1);
 	    		//JOptionPane.showMessageDialog(null, "Random AI placed an 'O' at "+location);
 	    		drawBoard(boardArray);
 	    		
 	    		if(winYet(boardArray,1) == true) {
-	    			MLAI.reweight(false, used,MLAI.nodeWeights); 
+	    			reweight(false, used,nodeWeights, 1); 
 	    			//System.out.println("New node weights (lost)"); 
-	    			MLAI.nodeWeights = MLAI.reSort(MLAI.nodeWeights);
+	    			nodeWeights = reSort(nodeWeights);
 	    			System.out.println("New Weights");
-	    			MLAI.printArr(MLAI.nodeWeights); 
+	    			printArr(nodeWeights); 
 	    			try {
-						MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
+						dataOutput(nodeWeights, weightsDbFile);
 					} catch (IOException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	    			endGame("Random AI"); 
@@ -274,74 +281,36 @@ public class TicTacToe {
 		else if (inputq == 5) {
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {
-				boardArray = new int[]{3,4,5,6,7,8,9,10,11};
-				usedArray = new boolean[]{false,false,false,false,false,false,false,false,false};
+				boardArray 		= new int[]{3,4,5,6,7,8,9,10,11};
+				used 			= new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1 };
+				int timesUsed 	= 0;
+				int timesUsed2 	= 0;
 				//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
-				MLAI.nodeWeights = MLAI.dataInput(weightsDbFile);
-				MLAI.nodeWeight2 = MLAI.dataInput(weightsDb2File);
-				//MLAI.printArr(MLAI.nodeWeights);
-				int[] used = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-				int[] used2 = { -1, -1, -1, -1, -1, -1, -1, -1, -1 };
-				@SuppressWarnings("unused")
-				int timesUsed = 0;
+				nodeWeights 	= dataInput(weightsDbFile);
+				nodeWeights2 	= dataInput(weightsDb2File);
+				//printArr(nodeWeights);
 				for (int i = 0; i < Integer.MAX_VALUE; i++) {
-					//Machine Learning's turn
-					//JOptionPane.showMessageDialog(null, "Machine Learning 1's turn");
-					MLAI.sortByW(MLAI.nodeWeights);
-					location = MLAI.output(MLAI.nodeWeights, usedArray);
-					usedArray[location] = true;
-					used[timesUsed] = location;
+					//player 1's turn
+					sortByW(nodeWeights);
+					location = output(nodeWeights, used);
+					used[location] = 1;
 					timesUsed++;
 					turn(boardArray, location, 1);
 					//JOptionPane.showMessageDialog(null, "Machine Learning 1 placan 'X' at "+location);
 					drawBoard(boardArray);
-					if (winYet(boardArray, 1) == true) {
-						MLAI.reweight(true, used, MLAI.nodeWeights);
-						MLAI.reweight(false, used2, MLAI.nodeWeight2);
-						//System.out.println("New node weights (won)"); 
-						MLAI.nodeWeights = MLAI.reSort(MLAI.nodeWeights);
-						System.out.println("New Weights");
-						MLAI.printArr(MLAI.nodeWeights);
-						try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDb2File);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						//System.out.println("Data stored");
+					if (timesUsed >= 3 && winYet(boardArray, 1) == true) {
+						
+						reweightSortAndStore(weightsDbFile, nodeWeights, 1,
+								weightsDb2File, nodeWeights2, 2, used);
 						//endGame("Machine Learning 1");
 						c1++;
 						break;
 					}
 
-					if (winYet(boardArray, 2) == true) {
-						MLAI.reweight(true, used2, MLAI.nodeWeight2);
-						MLAI.reweight(false, used, MLAI.nodeWeights);
-						//System.out.println("New node weights (won)"); 
-						MLAI.nodeWeight2 = MLAI.reSort(MLAI.nodeWeight2);
-						System.out.println("New Weights");
-						MLAI.printArr(MLAI.nodeWeight2);
-						try {
-							MLAI.dataOutput(MLAI.nodeWeight2, weightsDb2File);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						//System.out.println("Data stored");
+					if (timesUsed2 >= 3 && winYet(boardArray, 2) == true) {
+						
+						reweightSortAndStore(weightsDb2File, nodeWeights2, 2,
+								weightsDbFile, nodeWeights, 1, used);
 						//endGame("Machine Learning 2");
 						c2++;
 						break;
@@ -352,38 +321,20 @@ public class TicTacToe {
 						t++;
 						break;
 					}
-					//Machine Learning 2's turn now
-					//JOptionPane.showMessageDialog(null, "Machine Learning 2's turn");
-					MLAI.sortByW(MLAI.nodeWeight2);
-					location = MLAI.output(MLAI.nodeWeight2, usedArray);
-					usedArray[location] = true;
-					used2[timesUsed] = location;
-					timesUsed++;
+					//player 2's turn now
+					sortByW(nodeWeights2);
+					location = output(nodeWeights2, used);
+					used[location] = 2;
+					timesUsed2++;
 					turn(boardArray, location, 2);
 					//JOptionPane.showMessageDialog(null, "Machine Learning 2 placed an 'X' at "+location);
 					drawBoard(boardArray);
-					if (winYet(boardArray, 2) == true) {
-						MLAI.reweight(true, used2, MLAI.nodeWeight2);
-						MLAI.reweight(false, used, MLAI.nodeWeights);
-						//System.out.println("New node weights (won)"); 
-						MLAI.nodeWeight2 = MLAI.reSort(MLAI.nodeWeight2);
-						System.out.println("New Weights");
-						MLAI.printArr(MLAI.nodeWeight2);
-						try {
-							MLAI.dataOutput(MLAI.nodeWeight2, weightsDb2File);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-
-						try {
-							MLAI.dataOutput(MLAI.nodeWeights, weightsDbFile);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						//System.out.println("Data stored");
+					if (timesUsed2 >= 3 && winYet(boardArray, 2) == true) {
+						
+						reweightSortAndStore(weightsDb2File, nodeWeights2, 2,
+								weightsDbFile, nodeWeights, 1, used);
 						//endGame("Machine Learning 2");
+						c2++;
 						break;
 					}
 
@@ -451,7 +402,7 @@ public class TicTacToe {
 		return false;
 	}
 	
-	public static int humanInput(boolean[] usedArray) {
+	public static int humanInput(int[] used) {
 		int output = 0;
 		while(true) {
 			//is the user bad at typing?
@@ -461,7 +412,7 @@ public class TicTacToe {
 			catch(Exception e) {JOptionPane.showMessageDialog(null,"Try again please, I'm Disappointed.");}
 			
 			if(output > 8 || output < 0) {JOptionPane.showMessageDialog(null, "Please choose a whole number between 0 and 8."); continue; } //outof bounds rip
-			if(usedArray[output] == true) {JOptionPane.showMessageDialog(null, "That space is already used, please choose another one."); continue;}
+			if(used[output] != -1) {JOptionPane.showMessageDialog(null, "That space is already used, please choose another one."); continue;}
 			else {break;}
 		}
 		return output; 
@@ -521,10 +472,4 @@ public class TicTacToe {
 		}
 		System.out.print("\n"+stringArray[0]+"|"+stringArray[1]+"|"+stringArray[2]+"\n-----------\n"+stringArray[3]+"|"+stringArray[4]+"|"+stringArray[5]+"\n-----------\n"+stringArray[6]+"|"+stringArray[7]+"|"+stringArray[8]+"\n");
 	}
-	
 }
-
-/*
-
-
-*/

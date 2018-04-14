@@ -1,11 +1,9 @@
-package tictactoe;
+package com.hhp.game;
 
 import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import Game.TicTacToe;
 
 public class TicTacToeTest {
 	File weightsDbFile = null;

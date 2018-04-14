@@ -1,8 +1,8 @@
-package AI;
+package com.hhp.game.util;
 
 import java.util.Random;
 
-import Game.TicTacToe;
+import com.hhp.game.TicTacToe;
 
 public class RandomAI{
 	//TODO: -done
@@ -14,7 +14,7 @@ public class RandomAI{
 		do {
 			output = rand.nextInt(9) + 0;
 		}
-		while(TicTacToe.usedArray[output] == true);
+		while(TicTacToe.used[output] == output);
 		
 		return output; 
 	}
