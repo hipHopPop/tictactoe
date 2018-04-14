@@ -1,5 +1,7 @@
 package com.hhp.game.util;
 
+import static com.hhp.game.util.Sorter.reSort;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,8 +11,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
-
-import com.hhp.game.TicTacToe;
 
 public class Utility {
 	static double w0 = 0.50,w1 = 0.50,w2 = 0.50,w3 = 0.50,w4 = 0.50,w5 = 0.50,w6 = 0.50,w7 = 0.50,w8 = 0.50;
@@ -124,16 +124,29 @@ public class Utility {
 		}
 	}
 	
-	public static int randomOutput() {
-		int output;
+	public static void reweightSortAndStore(File weightsDbFile, double[][] nodeWeights, int player, int[] used, boolean win) {
+		reweight(win, used,nodeWeights, player); 
+		nodeWeights = reSort(nodeWeights);
+		//System.out.println("New node weights (lost)"); 
+		//System.out.println("New Weights");
+		//printArr(nodeWeights); 
+		try {
+			dataOutput(nodeWeights, weightsDbFile);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static int randomOutput(int[] used) {
+		int locationOutput;
 		Random rand = new Random();
 		
 		do {
-			output = rand.nextInt(9) + 0;
+			locationOutput = rand.nextInt(9) + 0;
 		}
-		while(TicTacToe.used[output] == output);
+		while(used[locationOutput] != -1);
 		
-		return output; 
+		return locationOutput; 
 	}
 	
 	public static int humanInput(int[] used) {

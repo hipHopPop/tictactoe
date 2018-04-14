@@ -13,7 +13,7 @@ public class Printer {
 	public static void drawBoard(int[] boardArray) {
 		String[] stringArray = { "", "", "", "", "", "", "", "", "" };
 		// e.g. boardArray = {0,1,2,0,2,0,1,0,2};
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 2; i++) {
 			System.out.println("\n");
 		}
 		for (int i = 0; i < boardArray.length; i++) {

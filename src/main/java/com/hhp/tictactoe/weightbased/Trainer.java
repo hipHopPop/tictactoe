@@ -1,4 +1,4 @@
-package com.hhp.game;
+package com.hhp.tictactoe.weightbased;
 
 
 import static com.hhp.game.util.Printer.drawBoard;

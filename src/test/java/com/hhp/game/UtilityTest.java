@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
+import com.hhp.game.util.Printer;
 import com.hhp.game.util.Utility;
 
 public class UtilityTest {
@@ -22,11 +23,11 @@ public class UtilityTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Utility.printArr(Utility.nodeWeights);
+		Printer.printArr(Utility.nodeWeights);
 
 		System.out.println("\nReweight");
 		Utility.reweight(true, usedArr, Utility.nodeWeights, 1);
-		Utility.printArr(Utility.nodeWeights);
+		Printer.printArr(Utility.nodeWeights);
 
 		System.out.println("\ndataOutput()");
 		try {

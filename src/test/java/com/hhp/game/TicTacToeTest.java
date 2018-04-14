@@ -5,6 +5,8 @@ import java.io.File;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.hhp.tictactoe.weightbased.TicTacToe;
+
 public class TicTacToeTest {
 	File weightsDbFile = null;
 	File weightsDb2File = null;
