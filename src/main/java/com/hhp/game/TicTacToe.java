@@ -1,22 +1,27 @@
 package com.hhp.game;
 
+import static com.hhp.game.util.Printer.drawBoard;
+import static com.hhp.game.util.Printer.printArr;
+import static com.hhp.game.util.ResultCheck.checkTie;
+import static com.hhp.game.util.ResultCheck.endGame;
+import static com.hhp.game.util.ResultCheck.winYet;
+import static com.hhp.game.util.Sorter.reSort;
+import static com.hhp.game.util.Sorter.sortByW;
 import static com.hhp.game.util.Utility.dataInput;
 import static com.hhp.game.util.Utility.dataOutput;
+import static com.hhp.game.util.Utility.humanInput;
 import static com.hhp.game.util.Utility.nodeWeights;
 import static com.hhp.game.util.Utility.nodeWeights2;
 import static com.hhp.game.util.Utility.output;
-import static com.hhp.game.util.Utility.printArr;
-import static com.hhp.game.util.Utility.reSort;
+import static com.hhp.game.util.Utility.randomOutput;
 import static com.hhp.game.util.Utility.reweight;
 import static com.hhp.game.util.Utility.reweightSortAndStore;
-import static com.hhp.game.util.Utility.sortByW;
+import static com.hhp.game.util.Utility.turn;
 
 import java.io.File;
 import java.io.IOException;
 
 import javax.swing.JOptionPane;
-
-import com.hhp.game.util.RandomAI;
 
 public class TicTacToe {
 	//computer goes first
@@ -60,7 +65,7 @@ public class TicTacToe {
 		    		}
 		    		//Computer's turn now
 					//JOptionPane.showMessageDialog(null, "Computer 1's turn");
-					location 		= RandomAI.raiOutput();
+					location 		= randomOutput();
 		        	used[location] 	= location;
 		        	timesUsed++;
 		    		turn(boardArray, location, 1);
@@ -134,7 +139,7 @@ public class TicTacToe {
 	    		
 	    		//Computer's turn now
 				//JOptionPane.showMessageDialog(null, "Random AI 2's turn");
-				location 		= RandomAI.raiOutput();
+				location 		= randomOutput();
 	        	used[location] 	= location;
 	        	timesUsed++;
 	    		turn(boardArray, location, 1);
@@ -250,7 +255,7 @@ public class TicTacToe {
 
 	    		//Random AI's turn now
 	    		//JOptionPane.showMessageDialog(null, "Random AI's turn");
-				location = RandomAI.raiOutput();
+				location = randomOutput();
 	        	used[timesUsed] = location;
 	        	timesUsed++;
 	    		turn(boardArray, location, 1);
@@ -344,132 +349,4 @@ public class TicTacToe {
 				+ " times\nMachine Learning 2 Won " + c2 + " times");
 		}//end else if
 	}//end ML vs ML	}//end function
-    	
-	
-	public static boolean checkTie(int[] functionBoardArray) {
-		int noOfPieces = 0;
-		
-		//all spots taken up by a piece have a value of 1 or 2. If the sum of all the pieces is => 9, the board is full of pieces
-		for(int i = 0; i < functionBoardArray.length; i++) {
-			if(functionBoardArray[i] == 1 || functionBoardArray[i] == 2) {
-				noOfPieces ++;
-			}
-		}
-	
-		if (noOfPieces >= 9) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	//Made to accept "Tie", "Human 1", "Human 2", "Computer 1", "Computer 2"
-	public static void endGame(String input){
-		
-		if(input == "Tie") {
-			JOptionPane.showMessageDialog(null, "The Game Tied");
-		}
-		else{
-			JOptionPane.showMessageDialog(null, input+" Won");
-		}
-		
-	}
-	
-	public static boolean winYet(int[] functionBoardArray, int w) {
-		//O's win states
-		if(w == 1) {
-			if(functionBoardArray[0]  == 1 & functionBoardArray[1]   == 1 & functionBoardArray[2] == 1) {return true;}
-			else if(functionBoardArray[3]   == 1 & functionBoardArray[4]   == 1 & functionBoardArray[5] == 1) {return true;}
-			else if(functionBoardArray[6]   == 1 & functionBoardArray[7]   == 1 & functionBoardArray[8] == 1) {return true;}
-			else if(functionBoardArray[0]   == 1 & functionBoardArray[3]   == 1 & functionBoardArray[6] == 1) {return true;}
-			else if(functionBoardArray[1]   == 1 & functionBoardArray[4]   == 1 & functionBoardArray[7] == 1) {return true;}
-			else if(functionBoardArray[2]   == 1 & functionBoardArray[5]   == 1 & functionBoardArray[8] == 1) {return true;}
-			else if(functionBoardArray[0]   == 1 & functionBoardArray[4]   == 1 & functionBoardArray[8] == 1) {return true;}
-			else if(functionBoardArray[6]   == 1 & functionBoardArray[4]   == 1 & functionBoardArray[2] == 1) {return true;}	
-		}
-		//X's win states
-		if(w == 2){
-			if(functionBoardArray[0]  == 2 & functionBoardArray[1]   == 2 & functionBoardArray[2] == 2) {return true;}
-			else if(functionBoardArray[3]   == 2 & functionBoardArray[4]   == 2 & functionBoardArray[5] == 2) {return true;}
-			else if(functionBoardArray[6]   == 2 & functionBoardArray[7]   == 2 & functionBoardArray[8] == 2) {return true;}
-			else if(functionBoardArray[0]   == 2 & functionBoardArray[3]   == 2 & functionBoardArray[6] == 2) {return true;}
-			else if(functionBoardArray[1]   == 2 & functionBoardArray[4]   == 2 & functionBoardArray[7] == 2) {return true;}
-			else if(functionBoardArray[2]   == 2 & functionBoardArray[5]   == 2 & functionBoardArray[8] == 2) {return true;}
-			else if(functionBoardArray[0]   == 2 & functionBoardArray[4]   == 2 & functionBoardArray[8] == 2) {return true;}
-			else if(functionBoardArray[6]   == 2 & functionBoardArray[4]   == 2 & functionBoardArray[2] == 2) {return true;}
-		}
-		
-		return false;
-	}
-	
-	public static int humanInput(int[] used) {
-		int output = 0;
-		while(true) {
-			//is the user bad at typing?
-			try {
-				output = Integer.parseInt(JOptionPane.showInputDialog("What space do you want to go in?"));
-			}
-			catch(Exception e) {JOptionPane.showMessageDialog(null,"Try again please, I'm Disappointed.");}
-			
-			if(output > 8 || output < 0) {JOptionPane.showMessageDialog(null, "Please choose a whole number between 0 and 8."); continue; } //outof bounds rip
-			if(used[output] != -1) {JOptionPane.showMessageDialog(null, "That space is already used, please choose another one."); continue;}
-			else {break;}
-		}
-		return output; 
-	}
-	
-	public static int[] turn(int[] functionBoardArray, int location, int piece) {
-		//use boardArray, accept input, change array, return array
-		functionBoardArray[location] = piece;
-		return functionBoardArray;
-	}
-	
-	public static void drawBoard(int[] boardArray) {
-		String[] stringArray = {"","","","","","","","",""};
-		//e.g. boardArray = {0,1,2,0,2,0,1,0,2};
-		for(int i = 0; i < 50; i++) {
-		System.out.println("\n");
-		}	
-		for(int i = 0; i < boardArray.length; i++) {
-			if(boardArray[i] == 0) {
-				stringArray[i] = "   ";
-			}
-			else if(boardArray[i] == 1) {
-				stringArray[i] = " O ";
-			}
-			else if(boardArray[i] == 2) {
-				stringArray[i] = " X ";
-			}
-			
-			//what are numbers
-			else if(boardArray[i] == 3) {
-				stringArray[i] = " 0 ";
-			}
-			else if(boardArray[i] == 4) {
-				stringArray[i] = " 1 ";
-			}
-			else if(boardArray[i] == 5) {
-				stringArray[i] = " 2 ";
-			}
-			else if(boardArray[i] == 6) {
-				stringArray[i] = " 3 ";
-			}
-			else if(boardArray[i] == 7) {
-				stringArray[i] = " 4 ";
-			}
-			else if(boardArray[i] == 8) {
-				stringArray[i] = " 5 ";
-			}
-			else if(boardArray[i] == 9) {
-				stringArray[i] = " 6 ";
-			}
-			else if(boardArray[i] == 10) {
-				stringArray[i] = " 7 ";
-			}
-			else if(boardArray[i] == 11) {
-				stringArray[i] = " 8 ";
-			}
-		}
-		System.out.print("\n"+stringArray[0]+"|"+stringArray[1]+"|"+stringArray[2]+"\n-----------\n"+stringArray[3]+"|"+stringArray[4]+"|"+stringArray[5]+"\n-----------\n"+stringArray[6]+"|"+stringArray[7]+"|"+stringArray[8]+"\n");
-	}
 }

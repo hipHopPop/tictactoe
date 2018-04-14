@@ -1,15 +1,20 @@
 package com.hhp.game;
 
 
+import static com.hhp.game.util.Printer.drawBoard;
+import static com.hhp.game.util.Printer.printArr;
+import static com.hhp.game.util.ResultCheck.checkTie;
+import static com.hhp.game.util.ResultCheck.endGame;
+import static com.hhp.game.util.ResultCheck.winYet;
+import static com.hhp.game.util.Sorter.reSort;
+import static com.hhp.game.util.Sorter.sortByW;
 import static com.hhp.game.util.Utility.dataInput;
 import static com.hhp.game.util.Utility.dataOutput;
 import static com.hhp.game.util.Utility.nodeWeights;
 import static com.hhp.game.util.Utility.nodeWeights2;
 import static com.hhp.game.util.Utility.output;
-import static com.hhp.game.util.Utility.printArr;
-import static com.hhp.game.util.Utility.reSort;
 import static com.hhp.game.util.Utility.reweight;
-import static com.hhp.game.util.Utility.sortByW;
+import static com.hhp.game.util.Utility.turn;
 
 import java.awt.Window;
 import java.io.File;
@@ -42,10 +47,10 @@ public class Trainer {
 				TicTacToe.used[TicTacToe.location] = TicTacToe.location;
 	        	used[timesUsed] = TicTacToe.location;
 	        	timesUsed++;
-	        	TicTacToe.turn(TicTacToe.boardArray, TicTacToe.location, 1);
+	        	turn(TicTacToe.boardArray, TicTacToe.location, 1);
 	    		JOptionPane.showMessageDialog(null, "Machine Learning 1 placed an 'X' at "+TicTacToe.location);
-	    		TicTacToe.drawBoard(TicTacToe.boardArray);
-	    		if(TicTacToe.winYet(TicTacToe.boardArray,1) == true) {
+	    		drawBoard(TicTacToe.boardArray);
+	    		if(winYet(TicTacToe.boardArray,1) == true) {
 	    			reweight(true, used, nodeWeights, 1); 
 	    			reweight(false, used2, nodeWeights2, 2);
 	    			//System.out.println("New node weights (won)"); 
@@ -68,12 +73,12 @@ public class Trainer {
 						e.printStackTrace();
 					}
 	    			//System.out.println("Data stored");
-	    			TicTacToe.endGame("Machine Learning 1"); 
+	    			endGame("Machine Learning 1"); 
 	    			restart();
 	    			break;
 	    		}
 	    		
-	    		if(TicTacToe.checkTie(TicTacToe.boardArray)) {TicTacToe.endGame("Tie"); break; }
+	    		if(checkTie(TicTacToe.boardArray)) {endGame("Tie"); break; }
 	    		//Machine Learning 2's turn now
 				JOptionPane.showMessageDialog(null, "Machine Learning 2's turn");
 				sortByW(nodeWeights2);
@@ -81,10 +86,10 @@ public class Trainer {
 				TicTacToe.used[TicTacToe.location] = TicTacToe.location;
 	        	used2[timesUsed] = TicTacToe.location;
 	        	timesUsed++;
-	        	TicTacToe.turn(TicTacToe.boardArray, TicTacToe.location, 2);
+	        	turn(TicTacToe.boardArray, TicTacToe.location, 2);
 	    		JOptionPane.showMessageDialog(null, "Machine Learning 2 placed an 'X' at "+TicTacToe.location);
-	    		TicTacToe.drawBoard(TicTacToe.boardArray);
-	    		if(TicTacToe.winYet(TicTacToe.boardArray,2) == true) {
+	    		drawBoard(TicTacToe.boardArray);
+	    		if(winYet(TicTacToe.boardArray,2) == true) {
 	    			reweight(true, used2, nodeWeights2, 2);
 	    			reweight(false, used, nodeWeights, 1);
 	    			//System.out.println("New node weights (won)"); 
@@ -108,7 +113,7 @@ public class Trainer {
 						e.printStackTrace();
 					}
 	    			//System.out.println("Data stored");
-	    			TicTacToe.endGame("Machine Learning 2"); 
+	    			endGame("Machine Learning 2"); 
 	    			restart();
 
 	    			break;

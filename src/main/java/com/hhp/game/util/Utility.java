@@ -5,7 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+import com.hhp.game.TicTacToe;
 
 public class Utility {
 	static double w0 = 0.50,w1 = 0.50,w2 = 0.50,w3 = 0.50,w4 = 0.50,w5 = 0.50,w6 = 0.50,w7 = 0.50,w8 = 0.50;
@@ -46,32 +51,6 @@ public class Utility {
 		}
 		pw.close();
 
-	}
-
-   public static double[][] sortByW(double[][] nW){
-		//sort by weight [i][w]
-		//uses bubble-sort
-		boolean isSorted = false;
-		@SuppressWarnings("unused")
-		int switches = 0;
-		
-		while(isSorted == false) {
-			isSorted = true;
-			for(int i = 0; i < nW.length - 1; i++) {
-				if(nW[i][1] < nW[i+1][1]) {
-					double[] hold = nW[i+1];
-					nW[i+1] = nW[i];
-					nW[i] = hold;
-					//System.out.println("Switched " +nW[i][0]+ " with " +nW[i+1][0]);
-					switches++;
-					isSorted = false;
-				}//end if i > i+1
-			}//end for int i...
-			}//end while sorted is false
-
-		
-		//return sorted array
-		return nW;
 	}
 	
 	public static int output(double[][] nW, int[] used) {
@@ -124,44 +103,12 @@ public class Utility {
 		return nW;
 	}
 	
-	public static void printArr(double[][] arr) {
-		System.out.println("Node  Weight");
-		for(int i = 0; i<arr.length; i++) {
-			System.out.print(arr[i][0]+"   "); 
-			System.out.print(arr[i][1]+"\n");
-		}
-		}//end function
-	
-	public static double[][] reSort(double[][] nW) {
-		boolean isSorted = false;
-		@SuppressWarnings("unused")
-		int switches = 0;
-		
-		while(isSorted == false) {
-			isSorted = true;
-			for(int i = 0; i < nW.length - 1; i++) {
-				if(nW[i][0] > nW[i+1][0]) {
-					double[] hold = nW[i+1];
-					nW[i+1] = nW[i];
-					nW[i] = hold;
-					//System.out.println("Switched " +nW[i][0]+ " with " +nW[i+1][0]);
-					switches++;
-					isSorted = false;
-				}//end if i > i+1
-			}//end for int i...
-			}//end while sorted is false
-
-		
-		//return sorted array
-		return nW;
-	}
-	
 	public static void reweightSortAndStore(File winningWeightsDbFile, double[][] winningNodeWeights, int winningPlayer,
 			File losingWeightsDbFile, double[][] losingNodeWeights, int losingPlayer, int[] used) {
 		reweight(true, used, winningNodeWeights, winningPlayer);
 		reweight(false, used, losingNodeWeights, losingPlayer);
 		// System.out.println("New node weights (won)");
-		winningNodeWeights = reSort(winningNodeWeights);
+		winningNodeWeights = Sorter.reSort(winningNodeWeights);
 		//System.out.println("New Weights");
 		//printArr(winningNodeWeights);
 		try {
@@ -176,5 +123,38 @@ public class Utility {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static int randomOutput() {
+		int output;
+		Random rand = new Random();
+		
+		do {
+			output = rand.nextInt(9) + 0;
+		}
+		while(TicTacToe.used[output] == output);
+		
+		return output; 
+	}
+	
+	public static int humanInput(int[] used) {
+		int output = 0;
+		while(true) {
+			//is the user bad at typing?
+			try {
+				output = Integer.parseInt(JOptionPane.showInputDialog("What space do you want to go in?"));
+			}
+			catch(Exception e) {JOptionPane.showMessageDialog(null,"Try again please, I'm Disappointed.");}
+			
+			if(output > 8 || output < 0) {JOptionPane.showMessageDialog(null, "Please choose a whole number between 0 and 8."); continue; } //outof bounds rip
+			if(used[output] != -1) {JOptionPane.showMessageDialog(null, "That space is already used, please choose another one."); continue;}
+			else {break;}
+		}
+		return output; 
+	}
+	
+	public static int[] turn(int[] functionBoardArray, int location, int piece) {
+		//use boardArray, accept input, change array, return array
+		functionBoardArray[location] = piece;
+		return functionBoardArray;
+	}
 }
