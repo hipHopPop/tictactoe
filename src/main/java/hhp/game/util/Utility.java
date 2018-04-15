@@ -1,6 +1,6 @@
-package com.hhp.game.util;
+package hhp.game.util;
 
-import static com.hhp.game.util.Sorter.reSort;
+import static hhp.game.util.Sorter.reSort;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,4 +1,4 @@
-package com.hhp.game;
+package hhp.game.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
-import com.hhp.game.util.Printer;
-import com.hhp.game.util.Utility;
+import hhp.game.util.Printer;
+import hhp.game.util.Utility;
 
 public class UtilityTest {
 

@@ -1,11 +1,11 @@
-package com.hhp.game;
+package hhp.tictactoe.dumb;
 
 import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.hhp.tictactoe.weightbased.TicTacToe;
+import hhp.tictactoe.dumb.TicTacToe;
 
 public class TicTacToeTest {
 	File weightsDbFile = null;

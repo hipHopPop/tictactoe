@@ -1,4 +1,4 @@
-package com.hhp.game.util;
+package hhp.game.util;
 
 import javax.swing.JOptionPane;
 

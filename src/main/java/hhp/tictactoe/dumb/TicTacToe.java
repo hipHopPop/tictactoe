@@ -1,18 +1,18 @@
-package com.hhp.tictactoe.weightbased;
+package hhp.tictactoe.dumb;
 
-import static com.hhp.game.util.Printer.drawBoard;
-import static com.hhp.game.util.ResultCheck.checkTie;
-import static com.hhp.game.util.ResultCheck.endGame;
-import static com.hhp.game.util.ResultCheck.winYet;
-import static com.hhp.game.util.Sorter.sortByW;
-import static com.hhp.game.util.Utility.dataInput;
-import static com.hhp.game.util.Utility.humanInput;
-import static com.hhp.game.util.Utility.nodeWeights;
-import static com.hhp.game.util.Utility.nodeWeights2;
-import static com.hhp.game.util.Utility.output;
-import static com.hhp.game.util.Utility.randomOutput;
-import static com.hhp.game.util.Utility.reweightSortAndStore;
-import static com.hhp.game.util.Utility.turn;
+import static hhp.game.util.Printer.drawBoard;
+import static hhp.game.util.ResultCheck.checkTie;
+import static hhp.game.util.ResultCheck.endGame;
+import static hhp.game.util.ResultCheck.winYet;
+import static hhp.game.util.Sorter.sortByW;
+import static hhp.game.util.Utility.dataInput;
+import static hhp.game.util.Utility.humanInput;
+import static hhp.game.util.Utility.nodeWeights;
+import static hhp.game.util.Utility.nodeWeights2;
+import static hhp.game.util.Utility.output;
+import static hhp.game.util.Utility.randomOutput;
+import static hhp.game.util.Utility.reweightSortAndStore;
+import static hhp.game.util.Utility.turn;
 
 import java.io.File;
 
