@@ -1,11 +1,11 @@
-package hhp.tictactoe.dumb;
+package hhp.tictactoe.learning.supervised.dumb;
 
 import java.io.File;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import hhp.tictactoe.dumb.TicTacToe;
+import hhp.tictactoe.learning.supervised.dumb.TicTacToe;
 
 public class TicTacToeTest {
 	File weightsDbFile = null;

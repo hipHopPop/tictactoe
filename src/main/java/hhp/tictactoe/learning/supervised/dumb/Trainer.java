@@ -1,20 +1,20 @@
-package hhp.tictactoe.dumb;
+package hhp.tictactoe.learning.supervised.dumb;
 
 
-import static hhp.game.util.Printer.drawBoard;
-import static hhp.game.util.Printer.printArr;
-import static hhp.game.util.ResultCheck.checkTie;
-import static hhp.game.util.ResultCheck.endGame;
-import static hhp.game.util.ResultCheck.winYet;
-import static hhp.game.util.Sorter.reSort;
-import static hhp.game.util.Sorter.sortByW;
-import static hhp.game.util.Utility.dataInput;
-import static hhp.game.util.Utility.dataOutput;
-import static hhp.game.util.Utility.nodeWeights;
-import static hhp.game.util.Utility.nodeWeights2;
-import static hhp.game.util.Utility.output;
-import static hhp.game.util.Utility.reweight;
-import static hhp.game.util.Utility.turn;
+import static hhp.tictactoe.learning.supervised.dumb.util.Printer.drawBoard;
+import static hhp.tictactoe.learning.supervised.dumb.util.Printer.printArr;
+import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.checkTie;
+import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.endGame;
+import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.winYet;
+import static hhp.tictactoe.learning.supervised.dumb.util.Sorter.reSort;
+import static hhp.tictactoe.learning.supervised.dumb.util.Sorter.sortByW;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.dataInput;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.dataOutput;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.nodeWeights;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.nodeWeights2;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.output;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.reweight;
+import static hhp.tictactoe.learning.supervised.dumb.util.Utility.turn;
 
 import java.awt.Window;
 import java.io.File;

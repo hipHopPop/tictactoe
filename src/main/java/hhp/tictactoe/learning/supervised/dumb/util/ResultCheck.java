@@ -1,4 +1,4 @@
-package hhp.game.util;
+package hhp.tictactoe.learning.supervised.dumb.util;
 
 import javax.swing.JOptionPane;
 

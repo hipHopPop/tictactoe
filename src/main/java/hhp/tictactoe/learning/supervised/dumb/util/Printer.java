@@ -1,4 +1,4 @@
-package hhp.game.util;
+package hhp.tictactoe.learning.supervised.dumb.util;
 
 public class Printer {
 

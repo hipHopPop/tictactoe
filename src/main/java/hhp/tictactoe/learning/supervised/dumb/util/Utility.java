@@ -1,6 +1,6 @@
-package hhp.game.util;
+package hhp.tictactoe.learning.supervised.dumb.util;
 
-import static hhp.game.util.Sorter.reSort;
+import static hhp.tictactoe.learning.supervised.dumb.util.Sorter.reSort;
 
 import java.io.File;
 import java.io.FileWriter;

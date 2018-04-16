@@ -1,15 +1,27 @@
-simple weight based:
+
+supervised learning:
 --------------------
--game adjusts its strategy based on previous games, storing the data in a text file "WeightsDatabase"<br>
+-dumb weight based
+------------------
+---game adjusts its strategy based on previous games, storing the data in a text file "WeightsDatabase"<br>
 -weight based implementation from https://github.com/Mateo-S/Tic-Tac-Toe-ML.git<br>
 
-supervised learning: TODO
---------------------
+-smart weight based
+-------------------
+-training with "tic-tac-toe.data.txt" images for patterns<br>
+--pattern recognition by classification:<br>
+---positive results<br>
+----every possible state is a category<br>
+----images are ranked using weight<br>
+----game adjusts its strategy based on previous games, storing the data in a text file "SmartWeightsDatabase"<br>
+
+unsupervised learning:  TODO
+---------------------
 -4 layers of neural networks looking for patterns<br>
 --first layer<br>
----final winning move<br>
+---if player has a final winning move<br>
 --second layer<br>
----opponent's final winning move<br>
+---if opponent has a final winning move<br>
 --third layer<br>
 ---best possible move<br>
 --fourth layer<br>
