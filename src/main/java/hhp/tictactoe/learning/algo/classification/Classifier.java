@@ -3,6 +3,7 @@ package hhp.tictactoe.learning.algo.classification;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,21 +12,22 @@ import hhp.util.MapUtil;
 
 public class Classifier {
 
-	private Map<String, Map<String, Integer>> m = new HashMap<>();
-	private Map<String, Integer> fmForHighestRank = new HashMap<>();
-	private Map<String, Integer> fmForBestRank = new HashMap<>();
+	private Map<String, Map<String, Integer>> m 	= new HashMap<>();
+	private Map<String, Integer> fmForHighestRank 	= new HashMap<>();
+	private Map<String, Integer> fmForBestRank 		= new HashMap<>();
 
-	public void increaseWeight(String category, String image) {
+	public void setScrambledWeight(String category, String image) {
+		int random = new Random().nextInt(2);
 		Map<String, Integer> fm = m.get(category);
 		if (fm == null) {
 			fm = new HashMap<>();
-			fm.put(image, 1);
-			fmForHighestRank.put(image, 1);
+			fm.put(image, random);
+			fmForHighestRank.put(image, random);
 		} else {
 			Integer w = fm.get(image);
 			if (w == null) {
-				fm.put(image, 1);
-				fmForHighestRank.put(image, 1);
+				fm.put(image, random);
+				fmForHighestRank.put(image, random);
 			} else {
 				fm.put(image, ++w);
 				fmForHighestRank.put(image, w);
@@ -35,8 +37,8 @@ public class Classifier {
 	}
 
 	public void increaseWeight(List<String> gameData) {
-		String gameDataCsv = gameData.stream().collect(Collectors.joining(","));
-		StringBuilder category = new StringBuilder();
+		String gameDataCsv 		= gameData.stream().collect(Collectors.joining(","));
+		StringBuilder category 	= new StringBuilder();
 		gameData.stream().forEach(play -> {
 			category.append(play);
 			Map<String, Integer> fm = m.get(category.toString());
@@ -54,8 +56,8 @@ public class Classifier {
 	}
 
 	public void decreaseWeight(List<String> gameData) {
-		String gameDataCsv = gameData.stream().collect(Collectors.joining(","));
-		StringBuilder category = new StringBuilder();
+		String gameDataCsv 		= gameData.stream().collect(Collectors.joining(","));
+		StringBuilder category 	= new StringBuilder();
 		gameData.stream().forEach(play -> {
 			category.append(play);
 			Map<String, Integer> fm = m.get(category.toString());

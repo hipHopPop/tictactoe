@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Map.Entry;
@@ -17,7 +18,6 @@ import javax.swing.JOptionPane;
 import hhp.tictactoe.learning.algo.classification.Classifier;
 
 public class Utility {
-	private static Integer machineLeanringInputReturnValue = null;
 	
 	public static int humanInput(List<String> used) {
 		Integer output = null;
@@ -49,22 +49,15 @@ public class Utility {
 			}
 		}
 		Stream<Entry<String, Integer>> bestRankedImages = classifier.getBestRankedImages(gameData);
-		bestRankedImages.forEach(new Consumer<Entry<String, Integer>>() {
-			@Override
-			public void accept(Entry<String, Integer> entry) {
-				String[] split = entry.getKey().split(",");
-				for (int i = 0; i < split.length; i++) {
-					if (split[i].equalsIgnoreCase(player) && gameData.get(i).equalsIgnoreCase("b")) {
-						machineLeanringInputReturnValue = i;
-					}
+		for (Iterator<Entry<String, Integer>> iterator = bestRankedImages.iterator(); iterator.hasNext();) {
+			String[] split = iterator.next().getKey().split(",");
+			for (int i = 0; i < split.length; i++) {
+				if (split[i].equalsIgnoreCase(player) && gameData.get(i).equalsIgnoreCase("b")) {
+					return i;
 				}
 			}
-		});
-		if (machineLeanringInputReturnValue != null) {
-			return machineLeanringInputReturnValue;
-		} else {
-			throw new Exception("unable to find a location for machine learning..");
 		}
+		throw new Exception("unable to find a location for machine learning..");
 	}
 
 	public static int randomInput(List<String> gameData) {

@@ -37,8 +37,11 @@ public class TicTacToe {
 		String[] q = {"Player vs  Random AI", "Player vs Player", "Random AI vs Random AI", "Player vs Machine L", "Random AI vs MachineL", "MachineL vs MachineL"};
 	    inputq = JOptionPane.showOptionDialog(null,"What gamemode do you want to play?","TicTacToeTacToe",-1,-1,null,q,q[0]) ;
 	    drawBoard(boardArray);
-		        
-	    if(inputq == 0) { //Human vs Random AI 
+
+	    //==================
+	    //Human vs Random AI
+	    //==================
+	    if(inputq == 0) {
 			for (int x = 0; x < 10; x++) {
 				boardArray 		= new int[]{ 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 				used 			= new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1 };
@@ -68,7 +71,10 @@ public class TicTacToe {
 		    	}// end AI vs Player
 			}
 	    }
-	    else if (inputq == 1) { //Human 1 vs Human 2
+	    //==============
+	    //Human vs Human
+	    //==============
+	    else if (inputq == 1) {
 			used 			= new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1};
 			int timePlayed 	= 0;
 			int timePlayed2 = 0;
@@ -95,7 +101,10 @@ public class TicTacToe {
 	    	}
 	    
 	    } //end Player v Player
-	    else if (inputq == 2) { //Random AI vs Random AI
+	    //======================
+	    //Random AI vs Random AI
+	    //======================
+	    else if (inputq == 2) { 
 			used 			= new int[]{ -1, -1, -1, -1, -1, -1, -1, -1, -1};
 			int timePlayed 	= 0;
 			int timePlayed2 = 0;
@@ -122,8 +131,9 @@ public class TicTacToe {
 	    	}
 	    	
 	    } //end Random AI vs Random AI
-
+	    //==========================
 	    //Player vs Machine Learning
+	    //==========================
 	    else if (inputq == 3) {
 			for (int x = 0; x < 10; x++) {
 				boardArray 		= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
@@ -165,8 +175,9 @@ public class TicTacToe {
 		    	}
 		    }
 	    }
-	    
+	    //=============================
 	    //Machine Learning vs Random AI
+	    //=============================
 	    else if (inputq == 4) {
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {
@@ -210,8 +221,9 @@ public class TicTacToe {
 			JOptionPane.showMessageDialog(null, "The Game Tied " + t + " times\nMachine Learning Won " + c1
 					+ " times\nRandom AI Won " + c2 + " times");
 	    }//end ML vs Rand
-	    
+	    //====================================
 	    //Machine Learning vs Machine Learning
+	    //====================================
 		else if (inputq == 5) {
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {

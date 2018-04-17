@@ -28,12 +28,10 @@ public class Trainer {
 			stream.filter(line -> line.endsWith("positive")).forEach(line -> {
 				line = line.replaceAll(",positive", "");
 				String[] s = line.split(",");
+				StringBuilder category = new StringBuilder();
 				for (int i = 0; i < s.length; i++) {
-					StringBuilder category = new StringBuilder();
-					for (int j = 0; j <= i; j++) {
-						category.append(s[j]);
-					}
-					classifier.increaseWeight(category.toString(), line);
+					category.append(s[i]);
+					classifier.setScrambledWeight(category.toString(), line);
 				}
 			});
 		} catch (IOException e) {
