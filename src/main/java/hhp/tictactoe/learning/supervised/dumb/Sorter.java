@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.dumb.util;
+package hhp.tictactoe.learning.supervised.dumb;
 
 public class Sorter {
 

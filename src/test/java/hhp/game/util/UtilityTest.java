@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 
 import org.junit.Test;
 
-import hhp.tictactoe.learning.supervised.dumb.util.Utility;
+import hhp.tictactoe.learning.supervised.dumb.Utility;
 import hhp.util.Printer;
 
 public class UtilityTest {
