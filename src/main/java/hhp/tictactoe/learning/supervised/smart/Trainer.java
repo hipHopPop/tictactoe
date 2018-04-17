@@ -26,10 +26,11 @@ public class Trainer {
 		 */
 		try (Stream<String> stream = Files.lines(Paths.get(gameImagesURL.toURI()))) {
 			stream.filter(line -> line.endsWith("positive")).forEach(line -> {
+				line = line.replaceAll(",positive", "");
 				String[] s = line.split(",");
-				for (int i = 0; i < s.length-1; i++) {
+				for (int i = 0; i < s.length; i++) {
 					StringBuilder category = new StringBuilder();
-					for (int j = 0; j < i; j++) {
+					for (int j = 0; j <= i; j++) {
 						category.append(s[j]);
 					}
 					classifier.increaseWeight(category.toString(), line);
@@ -39,5 +40,11 @@ public class Trainer {
 			e.printStackTrace();
 		}
 		return classifier;
+	}
+	
+	public static void main(String[] args) throws URISyntaxException {
+		URL resource = TicTacToe.class.getResource("/supervised/tic-tac-toe.data.txt");
+		Classifier classifier = Trainer.train(resource);
+		classifier.printClassification();
 	}
 }

@@ -11,9 +11,9 @@ import hhp.util.MapUtil;
 
 public class Classifier {
 
-	private Map<String, Map<String, Integer>> m 	= new HashMap<>();
-	private Map<String, Integer> fmForHighestRank 	= new HashMap<>();
-	private Map<String, Integer> fmForBestRank 		= new HashMap<>();
+	private Map<String, Map<String, Integer>> m = new HashMap<>();
+	private Map<String, Integer> fmForHighestRank = new HashMap<>();
+	private Map<String, Integer> fmForBestRank = new HashMap<>();
 
 	public void increaseWeight(String category, String image) {
 		Map<String, Integer> fm = m.get(category);
@@ -88,5 +88,16 @@ public class Classifier {
 	public String getHighestRankedImage() {
 		Entry<String, Integer> i = MapUtil.getHighestRankedImage(fmForHighestRank);
 		return i.getKey();
+	}
+
+	public void printClassification() {
+		m.keySet().stream().forEach(category -> {
+			System.out.println("\n"+category);
+			Map<String, Integer> fm = m.get(category);
+			fm.keySet().stream()
+			.forEach(featureKey -> {
+				System.out.println(featureKey + " - " + fm.get(featureKey));
+			});
+		});
 	}
 }

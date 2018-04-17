@@ -41,7 +41,7 @@ public class Utility {
 			//get highest ranked image
 			String highestRankedImage = classifier.getHighestRankedImage();
 			String[] split = highestRankedImage.split(",");
-			for (int i = 0; i < split.length-1; i++) {
+			for (int i = 0; i < split.length; i++) {
 				if (split[i].equalsIgnoreCase("x")) {
 					return i;
 				}
@@ -52,7 +52,7 @@ public class Utility {
 			@Override
 			public void accept(Entry<String, Integer> entry) {
 				String[] split = entry.getKey().split(",");
-				for (int i = 0; i < split.length-1; i++) {
+				for (int i = 0; i < split.length; i++) {
 					if (split[i].equalsIgnoreCase(player) && gameData.get(i).equalsIgnoreCase("b")) {
 						machineLeanringInputReturnValue = i;
 					}
