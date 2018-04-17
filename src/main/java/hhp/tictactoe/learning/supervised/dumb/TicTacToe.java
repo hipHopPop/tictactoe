@@ -87,7 +87,7 @@ public class TicTacToe {
 	    		//Human 2's turn
 				location 		= humanInput(used);
 	        	used[location] 	= 2;
-	        	timePlayed++;
+	        	timePlayed2++;
 	    		turn(boardArray, location, 2);
 	    		drawBoard(boardArray);
 	    		if(timePlayed2 >= 3 && winYet(boardArray,2) == true) { endGame("Player 2"); break; }
@@ -114,7 +114,7 @@ public class TicTacToe {
 	    		//Computer's turn now
 				location 		= randomOutput(used);
 	        	used[location] 	= 2;
-	        	timePlayed++;
+	        	timePlayed2++;
 	    		turn(boardArray, location, 2);
 	    		drawBoard(boardArray);
 	    		if(timePlayed2 >= 3 && winYet(boardArray,2) == true) { endGame("Random AI 2"); break; }
