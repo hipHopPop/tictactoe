@@ -15,6 +15,11 @@ supervised learning:
 ----images are ranked using weight<br>
 ----game adjusts its strategy based on previous games, storing the data in a text file "SmartWeightsDatabase"<br>
 
+-back propagation:
+-------------------
+-same as smart supervised learning and<br> 
+-game results influence future moves based on win or loss<br>
+
 unsupervised learning:  TODO
 ---------------------
 -4 layers of neural networks looking for patterns<br>
@@ -27,14 +32,11 @@ unsupervised learning:  TODO
 --fourth layer<br>
 ---classification of board position before move<br>
 
-reinforcement learning - back propagation:  TODO
-------------------------------------------
--same as supervised learning and<br> 
--game results back propagation<br>
---remembers important moves of a win<br>
-
 reinforcement learning - winning probability:  TODO
 ---------------------------------------------
 -same as supervised learning and<br> 
 -check every possible moves<br>
 --predict winner<br>
+
+reinforcement learning - back propagation:  TODO
+------------------------------------------
