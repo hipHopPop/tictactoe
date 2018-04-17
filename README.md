@@ -13,7 +13,6 @@ supervised learning:
 ---positive results<br>
 ----every possible state is a category<br>
 ----images are ranked using weight<br>
-----game adjusts its strategy based on previous games, storing the data in a text file "SmartWeightsDatabase"<br>
 
 -back propagation:
 -------------------
