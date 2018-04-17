@@ -60,28 +60,28 @@ public class TicTacToe {
 		    		//Machine Learning's turn now
 					location 	= machineLearningInput(gameData, classifier, X);
 		        	gameData.set(location, X);
-		        	timePlayed2++;
+		        	timePlayed++;
 		    		turn(boardArray, location, X);
 		    		drawBoard(boardArray);
-		    		if(timePlayed2 >= 3 && winYet(boardArray,1)) {
+		    		if(timePlayed >= 3 && winYet(boardArray,1)) {
 		    			if (doBackPropagation) { classifier.increaseWeight(gameData); }
 		    			endGame("Machine Learning"); 
 		    			break;
 		    		}
-					if (checkTie(boardArray)) { endGame("Tie"); break; }
+					if (timePlayed >= 3 && checkTie(boardArray)) { endGame("Tie"); break; }
 					//------------
 		    		//human's turn
 					location 	= humanInput(gameData);
 		        	gameData.set(location, O);
-		        	timePlayed++;
+		        	timePlayed2++;
 		    		turn(boardArray, location, O);
 		    		drawBoard(boardArray);
-		    		if(timePlayed >= 3 && winYet(boardArray, 2)) {
+		    		if(timePlayed2 >= 3 && winYet(boardArray, 2)) {
 		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); }
 		    			endGame("Human"); 
 		    			break;
 		    		}
-					if (checkTie(boardArray)) { endGame("Tie"); break; }
+					if (timePlayed2 >= 3 && checkTie(boardArray)) { endGame("Tie"); break; }
 		    	}
 		    }
 	    }

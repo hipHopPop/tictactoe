@@ -147,7 +147,7 @@ public class TicTacToe {
 		    			endGame("Human"); 
 		    			break;
 		    		}
-					if (checkTie(boardArray)) { endGame("Tie"); break; }
+					if (timePlayed >= 3 && checkTie(boardArray)) { endGame("Tie"); break; }
 					//---------------------------
 		    		//Machine Learning's turn now
 					sortByW(nodeWeights);
@@ -161,7 +161,7 @@ public class TicTacToe {
 		    			endGame("Machine Learning"); 
 		    			break;
 		    		}
-					if (checkTie(boardArray)) { endGame("Tie"); break; }
+					if (timePlayed2 >= 3 && checkTie(boardArray)) { endGame("Tie"); break; }
 		    	}
 		    }
 	    }
