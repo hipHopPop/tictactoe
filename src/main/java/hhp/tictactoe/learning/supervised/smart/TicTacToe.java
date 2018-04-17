@@ -35,7 +35,7 @@ public class TicTacToe {
 	public static List<String> positiveGames = null;
 	public static List<String> negativeGames = null;
 	
-	public static void play(URL gameImagesURL) throws Exception{
+	public static void play(URL gameImagesURL, boolean doBackPropagation) throws Exception{
 		//loadGameImages(gameImagesURL);
 		Classifier classifier = train(gameImagesURL);
 		
@@ -64,7 +64,7 @@ public class TicTacToe {
 		    		turn(boardArray, location, X);
 		    		drawBoard(boardArray);
 		    		if(timePlayed2 >= 3 && winYet(boardArray,1)) {
-		    			classifier.increaseWeight(gameData);
+		    			if (doBackPropagation) { classifier.increaseWeight(gameData); }
 		    			endGame("Machine Learning"); 
 		    			break;
 		    		}
@@ -77,7 +77,7 @@ public class TicTacToe {
 		    		turn(boardArray, location, O);
 		    		drawBoard(boardArray);
 		    		if(timePlayed >= 3 && winYet(boardArray, 2)) {
-		    			classifier.decreaseWeight(gameData);
+		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); }
 		    			endGame("Human"); 
 		    			break;
 		    		}
