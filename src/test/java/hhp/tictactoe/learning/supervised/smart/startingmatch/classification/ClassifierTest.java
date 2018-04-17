@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.algo.classification;
+package hhp.tictactoe.learning.supervised.smart.startingmatch.classification;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

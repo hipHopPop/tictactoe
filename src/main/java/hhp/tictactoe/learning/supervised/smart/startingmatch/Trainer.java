@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.smart;
+package hhp.tictactoe.learning.supervised.smart.startingmatch;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import hhp.tictactoe.learning.algo.classification.Classifier;
+import hhp.tictactoe.learning.supervised.smart.startingmatch.classification.Classifier;
 
 public class Trainer {
 

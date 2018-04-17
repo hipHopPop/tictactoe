@@ -1,9 +1,8 @@
-package hhp.tictactoe.learning.supervised.smart;
+package hhp.tictactoe.learning.supervised.smart.positionmatch;
 
 import java.net.URL;
 
 import org.junit.Test;
-
 
 public class TicTacToeTest {
 

@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.smart;
+package hhp.tictactoe.learning.supervised.smart.startingmatch;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
-import hhp.tictactoe.learning.algo.classification.Classifier;
+import hhp.tictactoe.learning.supervised.smart.startingmatch.classification.Classifier;
 
 public class Utility {
 	
