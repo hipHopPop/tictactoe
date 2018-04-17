@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.dumb.util;
+package hhp.util;
 
 public class Printer {
 
@@ -20,9 +20,9 @@ public class Printer {
 			if (boardArray[i] == 0) {
 				stringArray[i] = "   ";
 			} else if (boardArray[i] == 1) {
-				stringArray[i] = " O ";
-			} else if (boardArray[i] == 2) {
 				stringArray[i] = " X ";
+			} else if (boardArray[i] == 2) {
+				stringArray[i] = " O ";
 			}
 
 			// what are numbers

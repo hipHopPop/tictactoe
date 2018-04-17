@@ -1,15 +1,16 @@
 package hhp.tictactoe.learning.supervised.smart;
 
-import org.junit.Test;
+import java.net.URL;
 
-import hhp.tictactoe.learning.supervised.smart.TicTacToe;
+import org.junit.Test;
 
 
 public class TicTacToeTest {
 
 	@Test
-	public void test() {
-		TicTacToe.play();
+	public void test() throws Exception {
+		URL resource = TicTacToe.class.getResource("/supervised/tic-tac-toe.data.txt");
+		TicTacToe.play(resource);
 	}
 
 }

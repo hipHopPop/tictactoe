@@ -1,10 +1,16 @@
 package hhp.tictactoe.learning.supervised.smart;
 
-import static hhp.tictactoe.learning.supervised.dumb.util.Printer.drawBoard;
+import static hhp.tictactoe.learning.supervised.smart.Trainer.train;
+import static hhp.tictactoe.learning.supervised.smart.Utility.humanInput;
+import static hhp.tictactoe.learning.supervised.smart.Utility.machineLearningInput;
+import static hhp.tictactoe.learning.supervised.smart.Utility.turn;
+import static hhp.util.Printer.drawBoard;
+import static hhp.util.ResultCheck.checkTie;
+import static hhp.util.ResultCheck.endGame;
+import static hhp.util.ResultCheck.winYet;
 
 import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,7 +22,10 @@ import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
+import hhp.tictactoe.learning.algo.classification.Classifier;
+
 public class TicTacToe {
+	private static final String[] BLANKS = new String[] { "b", "b", "b", "b", "b", "b", "b", "b", "b" };
 	final static int turns 			= 9;
 	public static int[] boardArray 	= { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 	public static String X 			= "x";
@@ -26,8 +35,9 @@ public class TicTacToe {
 	public static List<String> positiveGames = null;
 	public static List<String> negativeGames = null;
 	
-	public static void play(URL gameImagesURL) throws URISyntaxException{
-		loadGameImages(gameImagesURL);
+	public static void play(URL gameImagesURL) throws Exception{
+		//loadGameImages(gameImagesURL);
+		Classifier classifier = train(gameImagesURL);
 		
 		int inputq = 0;
 		//H v H, M v M, R v R, H v M, H v R, M v R
@@ -36,40 +46,39 @@ public class TicTacToe {
 	    drawBoard(boardArray);
 		        
 	    //Player vs Machine Learning
-	   /* if(inputq == 0) {
-	    	
-	    	List<String> used 	= new ArrayList<>(9);
+	    if(inputq == 0) {
+
 			for (int x = 0; x < 10; x++) {
-				boardArray 		= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
+				List<String> gameData 	= new ArrayList<>(Arrays.asList(BLANKS));
+				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
 			    drawBoard(boardArray);
 				//JOptionPane.showMessageDialog(null, "You chose Player vs Machine Learning");
 				int timePlayed 	= 0;
 				int timePlayed2 = 0;
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
-					//------------
-		    		//human's turn
-					location 	= humanInput(used);
-		        	used.add(location, X);
-		        	timePlayed++;
+					//---------------------------
+		    		//Machine Learning's turn now
+					location 	= machineLearningInput(gameData, classifier, X);
+		        	gameData.set(location, X);
+		        	timePlayed2++;
 		    		turn(boardArray, location, X);
 		    		drawBoard(boardArray);
-		    		if(timePlayed >= 3 && winYet(boardArray, 1) == true) {
-		    			reweightSortAndStore(gameImagesURL, nodeWeights, 2, used, false);
-		    			endGame("Human"); 
+		    		if(timePlayed2 >= 3 && winYet(boardArray,1)) {
+		    			classifier.increaseWeight(gameData);
+		    			endGame("Machine Learning"); 
 		    			break;
 		    		}
 					if (checkTie(boardArray)) { endGame("Tie"); break; }
-					//---------------------------
-		    		//Machine Learning's turn now
-					sortByW(nodeWeights);
-					location 		= output(nodeWeights,used);
-		        	used.add(location, O);
-		        	timePlayed2++;
-		    		turn(boardArray, location, 2);
+					//------------
+		    		//human's turn
+					location 	= humanInput(gameData);
+		        	gameData.set(location, O);
+		        	timePlayed++;
+		    		turn(boardArray, location, O);
 		    		drawBoard(boardArray);
-		    		if(timePlayed2 >= 3 && winYet(boardArray,2) == true) {
-		    			reweightSortAndStore(gameImagesURL, nodeWeights, 2, used, true);
-		    			endGame("Machine Learning"); 
+		    		if(timePlayed >= 3 && winYet(boardArray, 2)) {
+		    			classifier.decreaseWeight(gameData);
+		    			endGame("Human"); 
 		    			break;
 		    		}
 					if (checkTie(boardArray)) { endGame("Tie"); break; }
@@ -78,7 +87,7 @@ public class TicTacToe {
 	    }
 	    
 	    //Machine Learning vs Random AI
-	    else if (inputq == 1) {
+	    /*else if (inputq == 1) {
 	    	List<String> used 	= new ArrayList<>(9);
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {
@@ -169,23 +178,6 @@ public class TicTacToe {
 				+ " times\nMachine Learning 2 Won " + c2 + " times");
 		}//end else if
 */	}//end ML vs ML	}//end function
-
-	private static void loadGameImages(URL gameImagesURL) throws URISyntaxException {
-		try (Stream<String> stream = Files.lines(Paths.get(gameImagesURL.toURI()))) {
-
-			positiveGames = stream
-					.filter(line -> line.endsWith("positive"))
-					.collect(Collectors.toList());
-			negativeGames = stream
-					.filter(line -> line.endsWith("negative"))
-					.collect(Collectors.toList());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//positiveGames.forEach(System.out::println);
-		//negativeGames.forEach(System.out::println);
-	}
 	
 	public static void main(String[] args) throws Exception {
 		List<String> list = new ArrayList<>();

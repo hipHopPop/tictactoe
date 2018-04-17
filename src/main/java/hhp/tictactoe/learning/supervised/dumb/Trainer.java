@@ -1,11 +1,6 @@
 package hhp.tictactoe.learning.supervised.dumb;
 
 
-import static hhp.tictactoe.learning.supervised.dumb.util.Printer.drawBoard;
-import static hhp.tictactoe.learning.supervised.dumb.util.Printer.printArr;
-import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.checkTie;
-import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.endGame;
-import static hhp.tictactoe.learning.supervised.dumb.util.ResultCheck.winYet;
 import static hhp.tictactoe.learning.supervised.dumb.util.Sorter.reSort;
 import static hhp.tictactoe.learning.supervised.dumb.util.Sorter.sortByW;
 import static hhp.tictactoe.learning.supervised.dumb.util.Utility.dataInput;
@@ -15,6 +10,11 @@ import static hhp.tictactoe.learning.supervised.dumb.util.Utility.nodeWeights2;
 import static hhp.tictactoe.learning.supervised.dumb.util.Utility.output;
 import static hhp.tictactoe.learning.supervised.dumb.util.Utility.reweight;
 import static hhp.tictactoe.learning.supervised.dumb.util.Utility.turn;
+import static hhp.util.Printer.drawBoard;
+import static hhp.util.Printer.printArr;
+import static hhp.util.ResultCheck.checkTie;
+import static hhp.util.ResultCheck.endGame;
+import static hhp.util.ResultCheck.winYet;
 
 import java.awt.Window;
 import java.io.File;
