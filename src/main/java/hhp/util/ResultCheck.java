@@ -16,6 +16,7 @@ public class ResultCheck {
 		if (noOfPieces >= 9) {
 			return true;
 		} else {
+			//TODO: check if tie even if < 9 
 			return false;
 		}
 	}

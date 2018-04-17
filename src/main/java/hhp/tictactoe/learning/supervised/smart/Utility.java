@@ -6,6 +6,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Random;
 import java.util.Map.Entry;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -64,6 +65,18 @@ public class Utility {
 		} else {
 			throw new Exception("unable to find a location for machine learning..");
 		}
+	}
+
+	public static int randomInput(List<String> gameData) {
+		int locationInput;
+		Random rand = new Random();
+		
+		do {
+			locationInput = rand.nextInt(9) + 0;
+		}
+		while( ! gameData.get(locationInput).equalsIgnoreCase("b"));
+		
+		return locationInput; 
 	}
 	
 	public static int[] turn(int[] functionBoardArray, int location, String piece) {

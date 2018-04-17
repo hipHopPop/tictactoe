@@ -3,6 +3,7 @@ package hhp.tictactoe.learning.supervised.smart;
 import static hhp.tictactoe.learning.supervised.smart.Trainer.train;
 import static hhp.tictactoe.learning.supervised.smart.Utility.humanInput;
 import static hhp.tictactoe.learning.supervised.smart.Utility.machineLearningInput;
+import static hhp.tictactoe.learning.supervised.smart.Utility.randomInput;
 import static hhp.tictactoe.learning.supervised.smart.Utility.turn;
 import static hhp.util.Printer.drawBoard;
 import static hhp.util.ResultCheck.checkTie;
@@ -47,12 +48,11 @@ public class TicTacToe {
 		        
 	    //Player vs Machine Learning
 	    if(inputq == 0) {
-
+	    	//JOptionPane.showMessageDialog(null, "You chose Player vs Machine Learning");
 			for (int x = 0; x < 10; x++) {
 				List<String> gameData 	= new ArrayList<>(Arrays.asList(BLANKS));
-				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
+				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 			    drawBoard(boardArray);
-				//JOptionPane.showMessageDialog(null, "You chose Player vs Machine Learning");
 				int timePlayed 	= 0;
 				int timePlayed2 = 0;
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
@@ -87,40 +87,38 @@ public class TicTacToe {
 	    }
 	    
 	    //Machine Learning vs Random AI
-	    /*else if (inputq == 1) {
-	    	List<String> used 	= new ArrayList<>(9);
+	    else if (inputq == 1) {
+	    	//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Random AI");
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {
-				boardArray 		= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
-				nodeWeights 	= dataInput(gameImagesURL);
+				List<String> gameData 	= new ArrayList<>(Arrays.asList(BLANKS));
+				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+			    drawBoard(boardArray);
 				int timePlayed 	= 0;
 				int timePlayed2 = 0;
-				//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Random AI");
-				//printArr(nodeWeights);
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
 		    		//-----------------------
 		    		//Machine Learning's turn
-					sortByW(nodeWeights);
-					location 		= output(nodeWeights,used);
-		        	used.add(location, X);
+					location 	= machineLearningInput(gameData, classifier, X);
+		        	gameData.set(location, X);
 		        	timePlayed++;
-		    		turn(boardArray, location, 1);
+		    		turn(boardArray, location, X);
 		    		drawBoard(boardArray);
-		    		if(timePlayed >= 3 && winYet(boardArray,1) == true) {
-		    			reweightSortAndStore(gameImagesURL, nodeWeights, 1, used, true);
+		    		if(timePlayed >= 3 && winYet(boardArray,1)) {
+		    			if (doBackPropagation) { classifier.increaseWeight(gameData); }
 		    			c1++;
 						break;
 		    		}
 		    		if(timePlayed >= 3 && checkTie(boardArray)) { t++; break; }
 		    		//--------------------
 		    		//Random AI's turn now
-					location 		= randomOutput(used);
-		        	used.add(location, O);
+					location 		= randomInput(gameData);
+					gameData.set(location, O);
 		        	timePlayed2++;
-		    		turn(boardArray, location, 2);
+		    		turn(boardArray, location, O);
 		    		drawBoard(boardArray);
-		    		if(timePlayed2 >= 3 && winYet(boardArray,1) == true) {
-		    			reweightSortAndStore(gameImagesURL, nodeWeights, 1, used, false);
+		    		if(timePlayed2 >= 3 && winYet(boardArray,2) == true) {
+		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); }
 		    			c2++;
 						break;
 		    		}
@@ -133,41 +131,37 @@ public class TicTacToe {
 	    
 	    //Machine Learning vs Machine Learning
 		else if (inputq == 2) {
-	    	List<String> used 	= new ArrayList<>(9);
+			//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
+			Classifier classifier2 = classifier.clone();
 			int c1 = 0, c2 = 0, t = 0;
 			for (int x = 0; x < 1000; x++) {
-				boardArray 		= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11};
+				List<String> gameData 	= new ArrayList<>(Arrays.asList(BLANKS));
+				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 				int timePlayed 	= 0;
 				int timePlayed2 = 0;
-				//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
-				nodeWeights 	= dataInput(gameImagesURL);
-				nodeWeights2 	= dataInput(weightsDb2File);
-				//printArr(nodeWeights);
 				for (int i = 0; i < Integer.MAX_VALUE; i++) {
 					//---------------
 					//player 1's turn
-					sortByW(nodeWeights);
-					location = output(nodeWeights, used);
-					used[location] = 1;
+					location 	= machineLearningInput(gameData, classifier, X);
+		        	gameData.set(location, X);
 					timePlayed++;
-					turn(boardArray, location, 1);
+		    		turn(boardArray, location, X);
 					drawBoard(boardArray);
-					if (timePlayed >= 3 && winYet(boardArray, 1) == true) {
-						reweightSortAndStore(gameImagesURL, nodeWeights, 1, weightsDb2File, nodeWeights2, 2, used);
+					if (timePlayed >= 3 && winYet(boardArray, 1)) {
+		    			if (doBackPropagation) { classifier.increaseWeight(gameData); classifier2.decreaseWeight(gameData); }
 						c1++;
 						break;
 					}
 					if (timePlayed >= 3 && checkTie(boardArray)) { t++; break; }
 					//---------------
 					//player 2's turn
-					sortByW(nodeWeights2);
-					location = output(nodeWeights2, used);
-					used[location] = 2;
-					timePlayed2++;
-					turn(boardArray, location, 2);
+					location 	= machineLearningInput(gameData, classifier2, O);
+		        	gameData.set(location, O);
+		        	timePlayed2++;
+		    		turn(boardArray, location, O);
 					drawBoard(boardArray);
-					if (timePlayed2 >= 3 && winYet(boardArray, 2) == true) {
-						reweightSortAndStore(weightsDb2File, nodeWeights2, 2, gameImagesURL, nodeWeights, 1, used);
+					if (timePlayed2 >= 3 && winYet(boardArray, 2)) {
+		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); classifier2.increaseWeight(gameData); }
 						c2++;
 						break;
 					}
@@ -177,7 +171,7 @@ public class TicTacToe {
 			JOptionPane.showMessageDialog(null, "The Game Tied " + t + " times\nMachine Learning 1 Won " + c1
 				+ " times\nMachine Learning 2 Won " + c2 + " times");
 		}//end else if
-*/	}//end ML vs ML	}//end function
+	}//end ML vs ML	}//end function
 	
 	public static void main(String[] args) throws Exception {
 		List<String> list = new ArrayList<>();

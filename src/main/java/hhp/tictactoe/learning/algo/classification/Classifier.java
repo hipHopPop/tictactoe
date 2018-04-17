@@ -100,4 +100,36 @@ public class Classifier {
 			});
 		});
 	}
+	
+	@Override
+	public Classifier clone() throws CloneNotSupportedException {
+		Classifier clone = new Classifier();
+
+		Map<String, Map<String, Integer>> mClone 	= new HashMap<>();
+		Map<String, Integer> fmForHighestRankClone 	= new HashMap<>();
+		Map<String, Integer> fmForBestRankClone 	= new HashMap<>();
+		
+		for (String category : m.keySet()) {
+			Map<String, Integer> fm 		= m.get(category);
+			Map<String, Integer> fmClone 	= new HashMap<>();
+			for (String featureKey : fm.keySet()) {
+				fmClone.put(featureKey, fm.get(featureKey).intValue());
+			}
+			mClone.put(category, fmClone);
+		}
+
+		for (String featureKey : fmForHighestRank.keySet()) {
+			fmForHighestRankClone.put(featureKey, fmForHighestRank.get(featureKey).intValue());
+		}
+
+		for (String featureKey : fmForBestRank.keySet()) {
+			fmForBestRankClone.put(featureKey, fmForBestRank.get(featureKey).intValue());
+		}
+
+		clone.m 				= mClone;
+		clone.fmForHighestRank 	= fmForHighestRankClone;
+		clone.fmForBestRank 	= fmForBestRankClone;
+		
+		return clone;
+	}
 }
