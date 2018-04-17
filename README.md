@@ -13,6 +13,8 @@ supervised learning:
 ---positive results<br>
 ----every possible state is a category<br>
 ----images are ranked using weight<br>
+----pattern matching currently matches strings starting with what's in play
+-----should find highest ranked image by matching values in played positions TODO
 
 -back propagation:
 -------------------
