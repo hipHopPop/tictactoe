@@ -102,8 +102,9 @@ public class TicTacToe {
 		        	gameData.set(location1, X);
 		        	timePlayed++;
 		    		turn(boardArray, location1, X);
-		    		drawBoard(boardArray);
+		    		//drawBoard(boardArray);
 		    		if(timePlayed >= 3 && winYet(boardArray,1)) {
+			    		drawBoard(boardArray);
 		    			if (doBackPropagation) { classifier.increaseWeight(gameData); }
 		    			c1++;
 						break;
@@ -115,8 +116,9 @@ public class TicTacToe {
 					gameData.set(location2, O);
 		        	timePlayed2++;
 		    		turn(boardArray, location2, O);
-		    		drawBoard(boardArray);
+		    		//drawBoard(boardArray);
 		    		if(timePlayed2 >= 3 && winYet(boardArray,2) == true) {
+			    		drawBoard(boardArray);
 		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); }
 		    			c2++;
 						break;
@@ -134,7 +136,7 @@ public class TicTacToe {
 			//JOptionPane.showMessageDialog(null, "You chose Machine Learning vs Machine Learning");
 			Classifier classifier2 = classifier.clone();
 			int c1 = 0, c2 = 0, t = 0;
-			for (int x = 0; x < 100000; x++) {
+			for (int x = 0; x < 1000; x++) {
 				List<String> gameData 	= new ArrayList<>(Arrays.asList(BLANKS));
 				boardArray 				= new int[] { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
 				int timePlayed 	= 0;
@@ -146,8 +148,9 @@ public class TicTacToe {
 		        	gameData.set(location1, X);
 					timePlayed++;
 		    		turn(boardArray, location1, X);
-					drawBoard(boardArray);
+					//drawBoard(boardArray);
 					if (timePlayed >= 3 && winYet(boardArray, 1)) {
+						drawBoard(boardArray);
 		    			if (doBackPropagation) { classifier.increaseWeight(gameData); classifier2.decreaseWeight(gameData); }
 						c1++;
 						break;
@@ -159,8 +162,9 @@ public class TicTacToe {
 		        	gameData.set(location2, O);
 		        	timePlayed2++;
 		    		turn(boardArray, location2, O);
-					drawBoard(boardArray);
+					//drawBoard(boardArray);
 					if (timePlayed2 >= 3 && winYet(boardArray, 2)) {
+						drawBoard(boardArray);
 		    			if (doBackPropagation) { classifier.decreaseWeight(gameData); classifier2.increaseWeight(gameData); }
 						c2++;
 						break;

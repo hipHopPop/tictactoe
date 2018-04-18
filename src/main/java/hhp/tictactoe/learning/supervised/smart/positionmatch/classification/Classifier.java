@@ -14,12 +14,13 @@ import hhp.util.MapUtil;
 
 public class Classifier {
 
+	private static final int SCRAMBLE = 3;
 	private Map<String, Map<Integer, Map<String, Integer>>> playerPositionMap = new HashMap<>();
 	private Map<String, Integer> fmForHighestRank 		= new HashMap<>();
 	public static List<String> players = Arrays.asList(new String[]{"x", "o"});
 
 	public void setScrambledWeight(int position, String player, String image) {
-		int random = new Random().nextInt(3);
+		int random = new Random().nextInt(SCRAMBLE);
 		if ( ! players.contains(player)) {
 			return;
 		}
@@ -165,7 +166,7 @@ public class Classifier {
 				Map<String, Integer> featureMap 		= posiitonMap.get(position);
 				Map<String, Integer> featureMapClone 	= new HashMap<>();
 				for (String featureKey : featureMap.keySet()) {
-					featureMapClone.put(featureKey, new Random().nextInt(3));
+					featureMapClone.put(featureKey, new Random().nextInt(SCRAMBLE));
 				}
 				posiitonMapClone.put(position, featureMapClone);
 			}
