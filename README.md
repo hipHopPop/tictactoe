@@ -13,8 +13,8 @@ supervised learning:
 ---positive results<br>
 ----every possible state is a category<br>
 ----images are ranked using weight<br>
-----pattern matching strings starting with..
-----pattern matching strings matching values in played positions TODO
+----pattern matching strings starting with..<br>
+----pattern matching strings matching values in played positions TODO<br>
 
 -back propagation:
 -------------------

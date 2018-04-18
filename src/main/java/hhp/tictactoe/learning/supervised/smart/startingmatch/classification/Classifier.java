@@ -98,7 +98,7 @@ public class Classifier {
 			Map<String, Integer> fm = m.get(category);
 			fm.keySet().stream()
 			.forEach(featureKey -> {
-				System.out.println(featureKey + " - " + fm.get(featureKey));
+				System.out.println(featureKey + "(weight:" + fm.get(featureKey) + ")");
 			});
 		});
 	}

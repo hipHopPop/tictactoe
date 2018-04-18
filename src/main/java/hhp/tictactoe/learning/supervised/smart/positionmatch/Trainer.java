@@ -29,7 +29,7 @@ public class Trainer {
 				line = line.replaceAll(",positive", "");
 				String[] s = line.split(",");
 				for (int i = 0; i < s.length; i++) {
-					classifier.setDefaultWeight(i, s[i], line);
+					classifier.setScrambledWeight(i, s[i], line);
 				}
 			});
 		} catch (IOException e) {
