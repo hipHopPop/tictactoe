@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -42,19 +43,25 @@ public class Utility {
 			//get highest ranked image
 			String highestRankedImage = classifier.getHighestRankedImage();
 			String[] split = highestRankedImage.split(",");
+			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {
 				if (split[i].equalsIgnoreCase("x")) {
-					return i;
+					forRandomPick.add(i);
 				}
 			}
+			return forRandomPick.get(new Random().nextInt(forRandomPick.size()));
 		}
 		Stream<Entry<String, Integer>> bestRankedImages = classifier.getBestRankedImages(gameData);
 		for (Iterator<Entry<String, Integer>> iterator = bestRankedImages.iterator(); iterator.hasNext();) {
 			String[] split = iterator.next().getKey().split(",");
+			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {
 				if (split[i].equalsIgnoreCase(player) && gameData.get(i).equalsIgnoreCase("b")) {
-					return i;
+					forRandomPick.add(i);
 				}
+			}
+			if (forRandomPick.size() > 0) {
+				return forRandomPick.get(new Random().nextInt(forRandomPick.size()));
 			}
 		}
 		throw new Exception("unable to find a location for machine learning..");

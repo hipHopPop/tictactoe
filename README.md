@@ -15,13 +15,15 @@ supervised learning:
 ----images are ranked using weight<br>
 ----pattern matching strings starting with..<br>
 ----pattern matching strings matching values in played positions<br>
+----randomly picking best available positions<br>
+-----un-predictable results because of simple game rules<br> 
 
 -back propagation:
 -------------------
 -same as smart supervised learning and<br> 
 -game results influence future moves based on win or loss<br>
 
-unsupervised learning:  TODO
+un-supervised learning:  TODO
 ---------------------
 -4 layers of neural networks looking for patterns<br>
 --first layer<br>
