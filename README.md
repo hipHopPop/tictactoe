@@ -14,7 +14,7 @@ supervised learning:
 ----every possible state is a category<br>
 ----images are ranked using weight<br>
 ----pattern matching strings starting with..<br>
-----pattern matching strings matching values in played positions TODO<br>
+----pattern matching strings matching values in played positions<br>
 
 -back propagation:
 -------------------
