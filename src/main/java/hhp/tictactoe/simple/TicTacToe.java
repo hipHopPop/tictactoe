@@ -1,14 +1,14 @@
-package hhp.tictactoe.no.formula.simple;
+package hhp.tictactoe.simple;
 
-import static hhp.tictactoe.no.formula.simple.Sorter.sortByW;
-import static hhp.tictactoe.no.formula.simple.Utility.dataInput;
-import static hhp.tictactoe.no.formula.simple.Utility.humanInput;
-import static hhp.tictactoe.no.formula.simple.Utility.nodeWeights;
-import static hhp.tictactoe.no.formula.simple.Utility.nodeWeights2;
-import static hhp.tictactoe.no.formula.simple.Utility.output;
-import static hhp.tictactoe.no.formula.simple.Utility.randomOutput;
-import static hhp.tictactoe.no.formula.simple.Utility.reweightSortAndStore;
-import static hhp.tictactoe.no.formula.simple.Utility.turn;
+import static hhp.tictactoe.simple.Sorter.sortByW;
+import static hhp.tictactoe.simple.Utility.dataInput;
+import static hhp.tictactoe.simple.Utility.humanInput;
+import static hhp.tictactoe.simple.Utility.nodeWeights;
+import static hhp.tictactoe.simple.Utility.nodeWeights2;
+import static hhp.tictactoe.simple.Utility.output;
+import static hhp.tictactoe.simple.Utility.randomOutput;
+import static hhp.tictactoe.simple.Utility.reweightSortAndStore;
+import static hhp.tictactoe.simple.Utility.turn;
 import static hhp.util.Printer.drawBoard;
 import static hhp.util.ResultCheck.checkTie;
 import static hhp.util.ResultCheck.endGame;

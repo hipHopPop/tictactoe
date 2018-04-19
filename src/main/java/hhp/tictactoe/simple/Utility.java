@@ -1,6 +1,6 @@
-package hhp.tictactoe.no.formula.simple;
+package hhp.tictactoe.simple;
 
-import static hhp.tictactoe.no.formula.simple.Sorter.reSort;
+import static hhp.tictactoe.simple.Sorter.reSort;
 
 import java.io.File;
 import java.io.FileWriter;

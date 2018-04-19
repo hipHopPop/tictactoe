@@ -1,4 +1,4 @@
-package hhp.tictactoe.no.formula;
+package hhp.tictactoe.simple;
 
 import java.io.IOException;
 import java.net.URL;

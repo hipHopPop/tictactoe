@@ -1,4 +1,4 @@
-package hhp.tictactoe.no.formula.smart.startingmatch;
+package hhp.tictactoe.simple.smart.positionmatch;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -8,15 +8,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 import java.util.Map.Entry;
-import java.util.function.Consumer;
+import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
-import hhp.tictactoe.no.formula.smart.startingmatch.classification.Classifier;
+import hhp.tictactoe.simple.smart.positionmatch.classification.Classifier;
 
 public class Utility {
 	
@@ -51,8 +51,9 @@ public class Utility {
 			}
 			return forRandomPick.get(new Random().nextInt(forRandomPick.size()));
 		}
-		Stream<Entry<String, Integer>> bestRankedImages = classifier.getBestRankedImages(gameData);
-		for (Iterator<Entry<String, Integer>> iterator = bestRankedImages.iterator(); iterator.hasNext();) {
+		Map<String, Stream<Map.Entry<String, Integer>>> anyAndAllPositionMatch = classifier.filterForAnyAndAllPositionMatch(gameData);
+		//Map<String, Integer> allPositionMatch = anyAndAllPositionMatch.get("all");
+		for (Iterator<Entry<String, Integer>> iterator = anyAndAllPositionMatch.get("any").iterator(); iterator.hasNext();) {
 			String[] split = iterator.next().getKey().split(",");
 			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {

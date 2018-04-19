@@ -1,4 +1,4 @@
-package hhp.tictactoe.no.formula.simple;
+package hhp.tictactoe.simple;
 
 public class Sorter {
 

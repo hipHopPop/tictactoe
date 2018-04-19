@@ -1,11 +1,11 @@
-package hhp.tictactoe.no.formula;
+package hhp.tictactoe.simple;
 
 import java.io.ObjectInputStream;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import hhp.tictactoe.no.formula.smart.positionmatch.classification.Classifier;
+import hhp.tictactoe.simple.smart.positionmatch.classification.Classifier;
 
 public class ClassifierTest {
 
