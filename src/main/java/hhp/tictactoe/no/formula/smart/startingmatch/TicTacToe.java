@@ -1,10 +1,10 @@
-package hhp.tictactoe.learning.supervised.smart.startingmatch;
+package hhp.tictactoe.no.formula.smart.startingmatch;
 
-import static hhp.tictactoe.learning.supervised.smart.startingmatch.Trainer.train;
-import static hhp.tictactoe.learning.supervised.smart.startingmatch.Utility.humanInput;
-import static hhp.tictactoe.learning.supervised.smart.startingmatch.Utility.machineLearningInput;
-import static hhp.tictactoe.learning.supervised.smart.startingmatch.Utility.randomInput;
-import static hhp.tictactoe.learning.supervised.smart.startingmatch.Utility.turn;
+import static hhp.tictactoe.no.formula.smart.startingmatch.Trainer.train;
+import static hhp.tictactoe.no.formula.smart.startingmatch.Utility.humanInput;
+import static hhp.tictactoe.no.formula.smart.startingmatch.Utility.machineLearningInput;
+import static hhp.tictactoe.no.formula.smart.startingmatch.Utility.randomInput;
+import static hhp.tictactoe.no.formula.smart.startingmatch.Utility.turn;
 import static hhp.util.Printer.drawBoard;
 import static hhp.util.ResultCheck.checkTie;
 import static hhp.util.ResultCheck.endGame;
@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
-import hhp.tictactoe.learning.supervised.smart.startingmatch.classification.Classifier;
+import hhp.tictactoe.no.formula.smart.startingmatch.classification.Classifier;
 
 public class TicTacToe {
 	private static final String[] BLANKS = new String[] { "b", "b", "b", "b", "b", "b", "b", "b", "b" };

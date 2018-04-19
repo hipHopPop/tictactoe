@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.smart.positionmatch.classification;
+package hhp.tictactoe.no.formula.smart.positionmatch.classification;
 
 import java.util.Arrays;
 import java.util.HashMap;

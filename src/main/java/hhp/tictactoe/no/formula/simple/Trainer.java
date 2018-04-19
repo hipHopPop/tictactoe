@@ -1,15 +1,15 @@
-package hhp.tictactoe.learning.supervised.dumb;
+package hhp.tictactoe.no.formula.simple;
 
 
-import static hhp.tictactoe.learning.supervised.dumb.Sorter.reSort;
-import static hhp.tictactoe.learning.supervised.dumb.Sorter.sortByW;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.dataInput;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.dataOutput;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.nodeWeights;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.nodeWeights2;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.output;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.reweight;
-import static hhp.tictactoe.learning.supervised.dumb.Utility.turn;
+import static hhp.tictactoe.no.formula.simple.Sorter.reSort;
+import static hhp.tictactoe.no.formula.simple.Sorter.sortByW;
+import static hhp.tictactoe.no.formula.simple.Utility.dataInput;
+import static hhp.tictactoe.no.formula.simple.Utility.dataOutput;
+import static hhp.tictactoe.no.formula.simple.Utility.nodeWeights;
+import static hhp.tictactoe.no.formula.simple.Utility.nodeWeights2;
+import static hhp.tictactoe.no.formula.simple.Utility.output;
+import static hhp.tictactoe.no.formula.simple.Utility.reweight;
+import static hhp.tictactoe.no.formula.simple.Utility.turn;
 import static hhp.util.Printer.drawBoard;
 import static hhp.util.Printer.printArr;
 import static hhp.util.ResultCheck.checkTie;

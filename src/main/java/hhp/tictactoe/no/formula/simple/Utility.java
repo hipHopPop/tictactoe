@@ -1,6 +1,6 @@
-package hhp.tictactoe.learning.supervised.dumb;
+package hhp.tictactoe.no.formula.simple;
 
-import static hhp.tictactoe.learning.supervised.dumb.Sorter.reSort;
+import static hhp.tictactoe.no.formula.simple.Sorter.reSort;
 
 import java.io.File;
 import java.io.FileWriter;

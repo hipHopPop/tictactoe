@@ -1,4 +1,4 @@
-package hhp.tictactoe.learning.supervised.dumb;
+package hhp.tictactoe.no.formula.simple;
 
 public class Sorter {
 
