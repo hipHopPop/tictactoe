@@ -19,7 +19,7 @@ public class Classifier {
 	private Map<String, Integer> fmForHighestRank 		= new HashMap<>();
 	public static List<String> players = Arrays.asList(new String[]{"x", "o"});
 
-	public void setScrambledWeight(int position, String player, String image) {
+	public void setScrambledWeight(int position, String player, String gameData) {
 		int random = new Random().nextInt(SCRAMBLE);
 		if ( ! players.contains(player)) {
 			return;
@@ -31,13 +31,13 @@ public class Classifier {
 		Map<String, Integer> featureMap = positionMap.get(position);
 		if (featureMap == null) {
 			featureMap = new HashMap<>();
-			featureMap.put(image, random);
-			fmForHighestRank.put(image, random);
+			featureMap.put(gameData, random);
+			fmForHighestRank.put(gameData, random);
 		} else {
-			Integer weight = featureMap.get(image);
+			Integer weight = featureMap.get(gameData);
 			weight = (weight == null) ? random : ++weight;
-			featureMap.put(image, weight);
-			fmForHighestRank.put(image, weight);
+			featureMap.put(gameData, weight);
+			fmForHighestRank.put(gameData, weight);
 		}
 		positionMap.put(position, featureMap);
 		playerPositionMap.put(player, positionMap);
@@ -134,8 +134,8 @@ public class Classifier {
 		return anyAndAllPositionMatch;
 	}
 	
-	public String getHighestRankedImage() {
-		Entry<String, Integer> i = MapUtil.getHighestRankedImage(fmForHighestRank);
+	public String getHighestRankedGameData() {
+		Entry<String, Integer> i = MapUtil.getHighestRankedGameData(fmForHighestRank);
 		return i.getKey();
 	}
 

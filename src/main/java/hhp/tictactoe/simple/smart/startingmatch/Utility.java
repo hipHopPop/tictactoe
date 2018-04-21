@@ -40,9 +40,9 @@ public class Utility {
 	public static int machineLearningInput(List<String> gameData, Classifier classifier, String player) throws Exception {
 		String gameDataCsv = gameData.stream().collect(Collectors.joining(","));
 		if (gameDataCsv.equalsIgnoreCase("b,b,b,b,b,b,b,b,b")) {
-			//get highest ranked image
-			String highestRankedImage = classifier.getHighestRankedImage();
-			String[] split = highestRankedImage.split(",");
+			//get highest ranked game data
+			String highestRankedGameData = classifier.getHighestRankedGameData();
+			String[] split = highestRankedGameData.split(",");
 			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {
 				if (split[i].equalsIgnoreCase("x")) {
@@ -51,8 +51,8 @@ public class Utility {
 			}
 			return forRandomPick.get(new Random().nextInt(forRandomPick.size()));
 		}
-		Stream<Entry<String, Integer>> bestRankedImages = classifier.getBestRankedImages(gameData);
-		for (Iterator<Entry<String, Integer>> iterator = bestRankedImages.iterator(); iterator.hasNext();) {
+		Stream<Entry<String, Integer>> bestRankedGameData = classifier.getBestRankedGameData(gameData);
+		for (Iterator<Entry<String, Integer>> iterator = bestRankedGameData.iterator(); iterator.hasNext();) {
 			String[] split = iterator.next().getKey().split(",");
 			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {
@@ -84,8 +84,8 @@ public class Utility {
 		return functionBoardArray;
 	}
 
-	public static List<String> loadGameImages(URL gameImagesURL) throws URISyntaxException {
-		try (Stream<String> stream = Files.lines(Paths.get(gameImagesURL.toURI()))) {
+	public static List<String> loadGameData(URL gameDataURL) throws URISyntaxException {
+		try (Stream<String> stream = Files.lines(Paths.get(gameDataURL.toURI()))) {
 
 			List<String> positiveGames = stream
 					.filter(line -> line.endsWith("positive"))

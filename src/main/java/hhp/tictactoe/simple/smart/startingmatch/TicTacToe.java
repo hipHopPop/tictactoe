@@ -32,9 +32,9 @@ public class TicTacToe {
 	public static String O 			= "o";
 	public static String B 			= "b";
 	
-	public static void play(URL gameImagesURL, boolean doBackPropagation) throws Exception{
-		//loadGameImages(gameImagesURL);
-		Classifier classifier = train(gameImagesURL); //scrambles weights
+	public static void play(URL gameDataURL, boolean doBackPropagation) throws Exception{
+		//loadGameData(GameDataURL);
+		Classifier classifier = train(gameDataURL); //scrambles weights
 		
 		int inputq = 0;
 		//H v H, M v M, R v R, H v M, H v R, M v R

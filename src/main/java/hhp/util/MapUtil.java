@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import java.util.stream.Stream;
 
 public class MapUtil {
-	public static Entry<String, Integer> getHighestRankedImage(Map<String, Integer> map) {
+	public static Entry<String, Integer> getHighestRankedGameData(Map<String, Integer> map) {
 		Stream<Map.Entry<String, Integer>> sorted = getSortedMapByDescValue(map);
 		Entry<String, Integer> item = sorted.findFirst().orElse(null);
 		return item; 

@@ -11,7 +11,7 @@ import hhp.tictactoe.simple.smart.positionmatch.classification.Classifier;
 
 public class Trainer {
 
-	public static Classifier train(URL gameImagesURL) throws URISyntaxException {
+	public static Classifier train(URL gameDataURL) throws URISyntaxException {
 		/*
 		 * Create a new classifier instance. The context features are Strings and the
 		 * context will be classified with a String according to the featureset of the
@@ -24,7 +24,7 @@ public class Trainer {
 		 * learn methods. Imagine a tokenized text as follows. The tokens are the text's
 		 * features. The category of the text will either be positive or negative.
 		 */
-		try (Stream<String> stream = Files.lines(Paths.get(gameImagesURL.toURI()))) {
+		try (Stream<String> stream = Files.lines(Paths.get(gameDataURL.toURI()))) {
 			stream.filter(line -> line.endsWith("positive")).forEach(line -> {
 				line = line.replaceAll(",positive", "");
 				String[] s = line.split(",");

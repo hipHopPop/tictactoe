@@ -16,21 +16,21 @@ public class Classifier {
 	private Map<String, Integer> fmForHighestRank 	= new HashMap<>();
 	private Map<String, Integer> fmForBestRank 		= new HashMap<>();
 
-	public void setScrambledWeight(String category, String image) {
+	public void setScrambledWeight(String category, String gameData) {
 		int random = new Random().nextInt(2);
 		Map<String, Integer> fm = m.get(category);
 		if (fm == null) {
 			fm = new HashMap<>();
-			fm.put(image, random);
-			fmForHighestRank.put(image, random);
+			fm.put(gameData, random);
+			fmForHighestRank.put(gameData, random);
 		} else {
-			Integer w = fm.get(image);
+			Integer w = fm.get(gameData);
 			if (w == null) {
-				fm.put(image, random);
-				fmForHighestRank.put(image, random);
+				fm.put(gameData, random);
+				fmForHighestRank.put(gameData, random);
 			} else {
-				fm.put(image, ++w);
-				fmForHighestRank.put(image, w);
+				fm.put(gameData, ++w);
+				fmForHighestRank.put(gameData, w);
 			}
 		}
 		m.put(category, fm);
@@ -74,7 +74,7 @@ public class Classifier {
 		});
 	}
 
-	public Stream<Entry<String, Integer>> getBestRankedImages(List<String> gameData) {
+	public Stream<Entry<String, Integer>> getBestRankedGameData(List<String> gameData) {
 		fmForBestRank.clear();
 		StringBuilder category = new StringBuilder();
 		gameData.stream().forEach(play -> {
@@ -87,8 +87,8 @@ public class Classifier {
 		return MapUtil.getSortedMapByDescValue(fmForBestRank);
 	}
 
-	public String getHighestRankedImage() {
-		Entry<String, Integer> i = MapUtil.getHighestRankedImage(fmForHighestRank);
+	public String getHighestRankedGameData() {
+		Entry<String, Integer> i = MapUtil.getHighestRankedGameData(fmForHighestRank);
 		return i.getKey();
 	}
 
