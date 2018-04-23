@@ -1,4 +1,4 @@
-package hhp.tictactoe.simple.smart.positionmatch.classification;
+package hhp.tictactoe.simple.smart.positionmatch;
 
 import java.util.Arrays;
 import java.util.HashMap;

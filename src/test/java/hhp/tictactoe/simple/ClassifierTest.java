@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import hhp.tictactoe.simple.smart.positionmatch.classification.Classifier;
+import hhp.tictactoe.simple.smart.positionmatch.Classifier;
 
 public class ClassifierTest {
 

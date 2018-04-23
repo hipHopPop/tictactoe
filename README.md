@@ -20,7 +20,12 @@ simple no formula based design:
 
 supervised learning:
 --------------------
-
+-simple weight based
+--aggregates weights for each position
+--game adjusts its strategy based on previous games
+-image, convolutional neural network CNN TODO
+--generate all possible plays (ideally we need a dataset of expert moves for a given board pattern)
+--capture image of board on every move and feed it to CNN 
 
 un-supervised learning:  TODO
 ---------------------

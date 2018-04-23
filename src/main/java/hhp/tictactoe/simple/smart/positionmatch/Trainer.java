@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
 
-import hhp.tictactoe.simple.smart.positionmatch.classification.Classifier;
-
 public class Trainer {
 
 	public static Classifier train(URL gameDataURL) throws URISyntaxException {

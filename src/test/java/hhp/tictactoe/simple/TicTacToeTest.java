@@ -25,9 +25,9 @@ public class TicTacToeTest {
 
 	@Test
 	public void testStartingMatchWithBackPropagation() throws Exception {
-		URL resource = hhp.tictactoe.simple.backpropagation.TicTacToe.class
+		URL resource = hhp.tictactoe.backpropagation.TicTacToe.class
 				.getResource("/supervised/tic-tac-toe.data.txt");
-		hhp.tictactoe.simple.backpropagation.TicTacToe.playStartingMatch(resource);
+		hhp.tictactoe.backpropagation.TicTacToe.playStartingMatch(resource);
 	}
 
 	@Test
@@ -40,9 +40,9 @@ public class TicTacToeTest {
 
 	@Test
 	public void testPositionMatchWithBackPropagation() throws Exception {
-		URL resource = hhp.tictactoe.simple.backpropagation.TicTacToe.class
+		URL resource = hhp.tictactoe.backpropagation.TicTacToe.class
 				.getResource("/supervised/tic-tac-toe.data.txt");
-		hhp.tictactoe.simple.backpropagation.TicTacToe.playPositionMatch(resource);
+		hhp.tictactoe.backpropagation.TicTacToe.playPositionMatch(resource);
 	}
 
 }

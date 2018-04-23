@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class DataCountTest {
@@ -39,5 +40,22 @@ public class DataCountTest {
 			System.out.println(
 					player + " - " + positionList.stream().map(Object::toString).collect(Collectors.joining(",")));
 		});
+		//
+		List<Integer> weightList = new ArrayList<>(Arrays.asList(new Integer[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 }));
+		try (Stream<String> stream = Files.lines(Paths.get(resource.toURI()))) {
+			stream.filter(line -> line.endsWith("positive")).forEach(line -> {
+				line = line.replaceAll(",positive", "");
+				String[] s = line.split(",");
+
+				IntStream.range(0, s.length).filter(position -> s[position].equalsIgnoreCase("x"))
+				.forEach(i -> {
+					Integer positionCount = weightList.get(i);
+					weightList.set(i, (positionCount + 1));
+				});
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("x - " + weightList.stream().map(Object::toString).collect(Collectors.joining(",")));
 	}
 }

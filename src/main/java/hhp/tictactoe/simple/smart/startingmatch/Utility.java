@@ -16,8 +16,6 @@ import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
-import hhp.tictactoe.simple.smart.startingmatch.classification.Classifier;
-
 public class Utility {
 	
 	public static int humanInput(List<String> used) {
@@ -37,7 +35,7 @@ public class Utility {
 		return output; 
 	}
 	
-	public static int machineLearningInput(List<String> gameData, Classifier classifier, String player) throws Exception {
+	public static int machineLearningInput(List<String> gameData, Classifier classifier) throws Exception {
 		String gameDataCsv = gameData.stream().collect(Collectors.joining(","));
 		if (gameDataCsv.equalsIgnoreCase("b,b,b,b,b,b,b,b,b")) {
 			//get highest ranked game data
@@ -56,7 +54,7 @@ public class Utility {
 			String[] split = iterator.next().getKey().split(",");
 			List<Integer> forRandomPick = new ArrayList<>();
 			for (int i = 0; i < split.length; i++) {
-				if (split[i].equalsIgnoreCase(player) && gameData.get(i).equalsIgnoreCase("b")) {
+				if (split[i].equalsIgnoreCase("x") && gameData.get(i).equalsIgnoreCase("b")) {//checking for x because input data is "win for x"
 					forRandomPick.add(i);
 				}
 			}

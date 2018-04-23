@@ -23,8 +23,6 @@ import java.util.stream.Stream;
 
 import javax.swing.JOptionPane;
 
-import hhp.tictactoe.simple.smart.startingmatch.classification.Classifier;
-
 public class TicTacToe {
 	private static final String[] BLANKS = new String[] { "b", "b", "b", "b", "b", "b", "b", "b", "b" };
 	public static int[] boardArray 	= { 3, 4, 5, 6, 7, 8, 9, 10, 11 };
@@ -56,7 +54,7 @@ public class TicTacToe {
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
 					//---------------------------
 		    		//Machine Learning's turn now
-					int location1 = machineLearningInput(gameData, classifier, X);
+					int location1 = machineLearningInput(gameData, classifier);
 		        	gameData.set(location1, X);
 		        	timePlayed++;
 		    		turn(boardArray, location1, X);
@@ -98,7 +96,7 @@ public class TicTacToe {
 				for(int i = 0; i < Integer.MAX_VALUE; i++) {
 		    		//-----------------------
 		    		//Machine Learning's turn
-					int location1 = machineLearningInput(gameData, classifier, X);
+					int location1 = machineLearningInput(gameData, classifier);
 		        	gameData.set(location1, X);
 		        	timePlayed++;
 		    		turn(boardArray, location1, X);
@@ -142,7 +140,7 @@ public class TicTacToe {
 				for (int i = 0; i < Integer.MAX_VALUE; i++) {
 					//---------------
 					//player 1's turn
-					int location1 = machineLearningInput(gameData, classifier, X);
+					int location1 = machineLearningInput(gameData, classifier);
 		        	gameData.set(location1, X);
 					timePlayed++;
 		    		turn(boardArray, location1, X);
@@ -155,7 +153,7 @@ public class TicTacToe {
 					if (timePlayed >= 3 && checkTie(boardArray)) { t++; break; }
 					//---------------
 					//player 2's turn
-					int location2 = machineLearningInput(gameData, classifier2, O);
+					int location2 = machineLearningInput(gameData, classifier2);
 		        	gameData.set(location2, O);
 		        	timePlayed2++;
 		    		turn(boardArray, location2, O);
