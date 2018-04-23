@@ -14,18 +14,17 @@ simple no formula based design:
 -----pattern matching strings matching values in played positions<br>
 -----randomly picking best available positions<br>
 -----un-predictable results<br> 
--back propagation:
--same as smart supervised learning and<br> 
--game results influence future moves based on win or loss<br>
+-back propagation:<br>
+-same as smart program and game results influence future moves based on win or loss<br>
 
 supervised learning:
 --------------------
--simple weight based
---aggregates weights for each position
---game adjusts its strategy based on previous games
--image, convolutional neural network CNN TODO
---generate all possible plays (ideally we need a dataset of expert moves for a given board pattern)
---capture image of board on every move and feed it to CNN 
+-simple weight based<br>
+--aggregates weights for each position<br>
+--game adjusts its strategy based on previous games<br>
+-image, convolutional neural network CNN TODO<br>
+--generate all possible plays (ideally we need a dataset of expert moves for a given board pattern)<br>
+--capture image of board on every move and feed it to CNN <br>
 
 un-supervised learning:  TODO
 ---------------------
